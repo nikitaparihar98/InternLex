@@ -39,6 +39,9 @@ class Settings(BaseSettings):
         "http://127.0.0.1:5174",
         "http://127.0.0.1:5175",
         "http://127.0.0.1:5176",
+        "https://intern-lex.vercel.app",
+        "https://internlex.in",
+        "https://www.internlex.in",
     ]
 
     @field_validator("CORS_ORIGINS", mode="before")
