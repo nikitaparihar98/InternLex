@@ -1,0 +1,117 @@
+@import "tailwindcss";
+
+/* ── Design Tokens ─────────────────────────────────────── */
+:root {
+  /* Colours */
+  --color-cream:       #F5F1EA;
+  --color-cream-dark:  #EDE7DC;
+  --color-charcoal:    #1A1A1A;
+  --color-charcoal-mid:#2C2C2C;
+  --color-gold:        #B8871B;
+  --color-gold-light:  #D4A843;
+  --color-gold-pale:   #F3E7C8;
+  --color-text-primary:#111111;
+  --color-text-muted:  #6B7280;
+  --color-border:      #DDD5C5;
+  --color-white:       #FFFFFF;
+
+  /* Typography */
+  --font-serif: "Cormorant Garamond", Georgia, serif;
+  --font-sans:  "Inter", system-ui, sans-serif;
+
+  /* Spacing */
+  --section-py: 5.5rem;
+  --container-px: 1.5rem;
+}
+
+/* ── Reset ─────────────────────────────────────────────── */
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  background: var(--color-cream);
+  color: var(--color-text-primary);
+  font-family: var(--font-sans);
+  line-height: 1.6;
+}
+
+/* ── Typography ────────────────────────────────────────── */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-serif);
+  font-weight: 600;
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+  color: var(--color-text-primary);
+}
+
+p {
+  line-height: 1.75;
+}
+
+a, button, input, select, textarea {
+  transition-property: color, background-color, border-color, opacity;
+  transition-duration: 0.3s;
+  transition-timing-function: ease-in-out;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* ── Scrollbar ─────────────────────────────────────────── */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: var(--color-cream);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-border);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-gold);
+}
+
+/* ── Selection ─────────────────────────────────────────── */
+::selection {
+  background: var(--color-gold-pale);
+  color: var(--color-charcoal);
+}
+.fade-up {
+  animation: fadeUp 0.8s ease forwards;
+}
+
+.fade-up-delay {
+  animation: fadeUp 1s ease forwards;
+  animation-delay: 0.15s;
+  opacity: 0;
+}
+
+.fade-up-delay-2 {
+  animation: fadeUp 1s ease forwards;
+  animation-delay: 0.3s;
+  opacity: 0;
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

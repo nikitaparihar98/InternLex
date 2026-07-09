@@ -1,0 +1,32 @@
+export const opportunities = [
+  {
+    id: 1,
+    type: "Internship",
+    title: "Corporate Law Internship",
+    organization: "AZB & Partners",
+    location: "Delhi",
+    mode: "Hybrid",
+    deadline: "2026-07-15",
+    status: "Published",
+  },
+  {
+    id: 2,
+    type: "Webinar",
+    title: "AI and Law Webinar",
+    organization: "InternLex Legal Forum",
+    location: "Online",
+    mode: "Online",
+    deadline: "2026-07-20",
+    status: "Published",
+  },
+  {
+    id: 3,
+    type: "Competition",
+    title: "National Moot Court Competition",
+    organization: "NLU Delhi",
+    location: "Delhi",
+    mode: "Offline",
+    deadline: "2026-08-10",
+    status: "Draft",
+  },
+];
