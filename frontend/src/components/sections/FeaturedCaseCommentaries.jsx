@@ -33,7 +33,7 @@ function FeaturedCaseCommentaries() {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, margin: "-50px" }}
         transition={{ duration: 0.6 }}
-        style={{ maxWidth: "1280px", margin: "0 auto", padding: "0 2.5rem" }}
+        className="responsive-container"
       >
 
         {/* Header */}
@@ -83,7 +83,7 @@ function FeaturedCaseCommentaries() {
         </div>
 
         {/* 2-column card grid */}
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))", gap: "1.5rem" }}>
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: "1.5rem" }}>
           {cases.map((commentary) => (
             <article
               key={commentary.id}
