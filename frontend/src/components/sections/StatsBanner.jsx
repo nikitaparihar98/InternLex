@@ -49,31 +49,10 @@ function StatsBanner() {
             boxShadow: "0 25px 50px rgba(184, 135, 27, 0.08)",
             borderColor: "#D4A843" 
           }}
-          style={{
-            backgroundColor: "#FFFFFF",
-            border: "1px solid #E5E0D8",
-            borderRadius: "16px",
-            boxShadow: "0 10px 30px rgba(0,0,0,0.03)",
-            display: "flex",
-            flexDirection: "row",
-            alignItems: "center",
-            padding: "3rem",
-            gap: "3rem",
-            transition: "all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275)"
-          }}
+          className="stats-banner-container"
         >
           {/* Left Side: Stats */}
-          <div style={{ 
-            display: "flex", 
-            flexDirection: "row", 
-            alignItems: "center", 
-            justifyContent: "center",
-            flexWrap: "wrap",
-            gap: "2.5rem",
-            paddingRight: "3rem",
-            borderRight: "1px solid #E5E0D8",
-            minWidth: "max-content"
-          }}>
+          <div className="stats-banner-left">
             {/* Stat 1 */}
             <div style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
               <div style={{ color: "#B8871B", marginBottom: "0.5rem" }}>
@@ -160,12 +139,7 @@ function StatsBanner() {
           </div>
 
           {/* Right Side: Features */}
-          <div style={{ 
-            display: "flex", 
-            flex: 1,
-            justifyContent: "space-between",
-            gap: "2rem"
-          }}>
+          <div className="stats-banner-right">
             {[
               "Practical Drafting Assignments",
               "Performance-Based LOR",

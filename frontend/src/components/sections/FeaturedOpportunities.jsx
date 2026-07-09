@@ -90,12 +90,8 @@ function FeaturedOpportunities() {
           {opportunities.map((item, index) => (
             <div
               key={item.id}
+              className="featured-opp-item"
               style={{
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "space-between",
-                gap: "1.5rem",
-                padding: "1.25rem 1.75rem",
                 borderBottom: index < opportunities.length - 1 ? "1px solid #DDD5C5" : "none",
                 borderLeft: index === 0 ? "3px solid #B8871B" : "3px solid transparent", // Highlight the first one
               }}
@@ -130,7 +126,7 @@ function FeaturedOpportunities() {
               </div>
 
               {/* Right — location + CTA */}
-              <div style={{ display: "flex", alignItems: "center", gap: "3rem", flexShrink: 0 }}>
+              <div className="featured-opp-right">
                 <div style={{ textAlign: "right" }}>
                   <p
                     style={{
