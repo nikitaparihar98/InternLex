@@ -113,7 +113,7 @@ function Articles() {
                 boxShadow: activeTab === "articles" ? "0 4px 14px rgba(0,0,0,0.1)" : "none"
               }}
             >
-              Expert Articles
+              Legal Articles
             </button>
             <button
               onClick={() => setActiveTab("blogs")}
@@ -132,7 +132,7 @@ function Articles() {
                 boxShadow: activeTab === "blogs" ? "0 4px 14px rgba(0,0,0,0.1)" : "none"
               }}
             >
-              Community Blogs
+              Legal Blogs
             </button>
           </div>
 

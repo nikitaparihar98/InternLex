@@ -105,10 +105,10 @@ function StatsBanner() {
                 color: "#6B7280", 
                 margin: 0 
               }}>
-                Intl. Interns
+                International Interns
               </p>
             </div>
-
+ 
             {/* Stat 3 */}
             <div style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
               <div style={{ color: "#B8871B", marginBottom: "0.5rem" }}>
@@ -133,7 +133,7 @@ function StatsBanner() {
                 color: "#6B7280", 
                 margin: 0 
               }}>
-                Legal Interns
+                Legal Professionals
               </p>
             </div>
           </div>

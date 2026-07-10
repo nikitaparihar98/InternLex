@@ -38,7 +38,7 @@ function BlogDetail() {
     return (
       <div style={{ minHeight: "100vh", display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center", backgroundColor: "#F9F9F9" }}>
         <h2 style={{ fontFamily: "'Cormorant Garamond', Georgia, serif", fontSize: "2rem", marginBottom: "1rem" }}>Blog Not Found</h2>
-        <Link to="/articles" style={{ color: "#B8871B", fontFamily: "'Inter', sans-serif", textDecoration: "none" }}>← Back to Community Blogs</Link>
+        <Link to="/articles" style={{ color: "#B8871B", fontFamily: "'Inter', sans-serif", textDecoration: "none" }}>← Back to Legal Blogs</Link>
       </div>
     );
   }

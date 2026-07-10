@@ -1,8 +1,16 @@
-import { useRef } from "react";
+import { useRef, useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import Footer from "../../../components/layout/Footer";
 
 function About() {
+  const [isMobile, setIsMobile] = useState(false);
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 768);
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
+
   const sliderRef = useRef(null);
   const scrollLeft = () => sliderRef.current?.scrollBy({ left: -350, behavior: 'smooth' });
   const scrollRight = () => sliderRef.current?.scrollBy({ left: 350, behavior: 'smooth' });
@@ -163,26 +171,38 @@ function About() {
                     <motion.div
                       key={index}
                       whileHover="hover"
-                      initial="initial"
-                      animate="initial"
+                      initial="hidden"
+                      whileInView="visible"
+                      viewport={{ once: true, margin: "-50px" }}
                       variants={{
-                        initial: { y: 0, boxShadow: "0 5px 15px rgba(0, 0, 0, 0.03)", borderColor: "#E5E0D8" },
-                        hover: { y: -8, boxShadow: "0 15px 35px rgba(217, 119, 6, 0.25), 0 0 20px rgba(217, 119, 6, 0.4)", borderColor: "#D97706" }
+                        hidden: { opacity: 0, y: 40, scale: 0.93 },
+                        visible: { 
+                          opacity: 1, 
+                          y: 0, 
+                          scale: 1,
+                          transition: { type: "spring", stiffness: 100, damping: 15, delay: index * 0.1 }
+                        },
+                        hover: { 
+                          y: -8, 
+                          boxShadow: "0 15px 35px rgba(217, 119, 6, 0.25), 0 0 20px rgba(217, 119, 6, 0.4)", 
+                          borderColor: "#D97706" 
+                        }
                       }}
-                      transition={{ type: "spring", stiffness: 400, damping: 25 }}
                       style={{ flex: "0 0 calc(33.333% - 1rem)", minWidth: "180px", scrollSnapAlign: "start", backgroundColor: "#FFFFFF", borderRadius: "12px", overflow: "hidden", padding: "1rem", border: "1px solid #E5E0D8", cursor: "pointer", transition: "border-color 0.2s ease" }}
                     >
                       <div style={{ width: "100%", aspectRatio: "1/1", backgroundColor: "#FDFBF7", borderRadius: "8px", overflow: "hidden", marginBottom: "1rem", position: "relative" }}>
                         <motion.div
                           variants={{
-                            initial: { opacity: 0 },
+                            hidden: { opacity: 0 },
+                            visible: { opacity: 0 },
                             hover: { opacity: 1 }
                           }}
                           style={{ position: "absolute", inset: 0, background: "radial-gradient(circle at center, rgba(217, 119, 6, 0.4) 0%, transparent 70%)", zIndex: 1, pointerEvents: "none" }}
                         />
                         <motion.img 
                           variants={{
-                            initial: { scale: member.zoom, filter: "grayscale(100%)", WebkitFilter: "grayscale(100%)" },
+                            hidden: { scale: member.zoom, filter: isMobile ? "grayscale(0%)" : "grayscale(100%)", WebkitFilter: isMobile ? "grayscale(0%)" : "grayscale(100%)" },
+                            visible: { scale: member.zoom, filter: isMobile ? "grayscale(0%)" : "grayscale(100%)", WebkitFilter: isMobile ? "grayscale(0%)" : "grayscale(100%)" },
                             hover: { scale: member.zoom + 0.15, filter: "grayscale(0%) saturate(120%)", WebkitFilter: "grayscale(0%) saturate(120%)" }
                           }}
                           transition={{ type: "spring", stiffness: 400, damping: 25 }}
