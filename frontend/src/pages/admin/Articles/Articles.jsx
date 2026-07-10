@@ -169,11 +169,6 @@ function Articles() {
             </div>
 
             <div>
-              <label style={{ display: "block", fontFamily: "'Inter', sans-serif", fontSize: "11px", fontWeight: 600, letterSpacing: "0.05em", color: "#333333", marginBottom: "0.5rem", textTransform: "uppercase" }}>Short Description *</label>
-              <textarea required name="description" value={formData.description} onChange={handleInputChange} rows="2" style={{ width: "100%", border: "1px solid #DDD5C5", padding: "0.75rem", fontFamily: "'Inter', sans-serif", fontSize: "14px", outline: "none", resize: "vertical" }} />
-            </div>
-
-            <div>
               <label style={{ display: "block", fontFamily: "'Inter', sans-serif", fontSize: "11px", fontWeight: 600, letterSpacing: "0.05em", color: "#333333", marginBottom: "0.5rem", textTransform: "uppercase" }}>Full Content *</label>
               <RichTextEditor 
                 value={formData.content} 

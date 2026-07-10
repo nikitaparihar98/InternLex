@@ -88,88 +88,84 @@ function FeaturedArticles() {
                 overflow: "hidden",
                 display: "flex",
                 flexDirection: "column",
+                transition: "transform 0.3s ease, box-shadow 0.3s ease",
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.transform = "translateY(-4px)";
+                e.currentTarget.style.boxShadow = "0 12px 24px rgba(0,0,0,0.06)";
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.transform = "translateY(0)";
+                e.currentTarget.style.boxShadow = "none";
               }}
             >
-              {/* Image */}
-              {article.image && (
-                <div style={{ height: "250px", overflow: "hidden", backgroundColor: "#F8F6F1", display: "flex", justifyContent: "center", alignItems: "center" }}>
-                  <img
-                    src={getImageUrl(article.image)}
-                    alt={article.title}
-                    style={{ maxWidth: "100%", maxHeight: "100%", objectFit: "contain" }}
-                  />
-                </div>
-              )}
+              <Link
+                to={`/articles/${article.id}`}
+                style={{ textDecoration: "none", color: "inherit", display: "flex", flexDirection: "column", height: "100%", flex: 1 }}
+              >
+                {/* Image */}
+                {article.image && (
+                  <div style={{ height: "250px", overflow: "hidden", backgroundColor: "#F8F6F1", display: "flex", justifyContent: "center", alignItems: "center" }}>
+                    <img
+                      src={getImageUrl(article.image)}
+                      alt={article.title}
+                      style={{ maxWidth: "100%", maxHeight: "100%", objectFit: "contain" }}
+                    />
+                  </div>
+                )}
 
-              {/* Body */}
-              <div style={{ padding: "1.5rem", flex: 1, display: "flex", flexDirection: "column" }}>
-                <div style={{ marginBottom: "auto" }}>
+                {/* Body */}
+                <div style={{ padding: "1.5rem", flex: 1, display: "flex", flexDirection: "column" }}>
+                  <div style={{ marginBottom: "auto" }}>
+                    <span
+                      style={{
+                        display: "inline-flex",
+                        alignItems: "center",
+                        padding: "3px 10px",
+                        fontSize: "10px",
+                        fontWeight: 700,
+                        letterSpacing: "0.12em",
+                        textTransform: "uppercase",
+                        backgroundColor: "#F3E7C8",
+                        color: "#8A650F",
+                        borderRadius: "3px",
+                        fontFamily: "'Inter', sans-serif",
+                      }}
+                    >
+                      {article.publication_date ? new Date(article.publication_date).toLocaleDateString() : "Recently"}
+                    </span>
+
+                    <h3
+                      style={{
+                        fontFamily: "'Cormorant Garamond', Georgia, serif",
+                        fontSize: "1.35rem",
+                        fontWeight: 600,
+                        color: "#111111",
+                        lineHeight: 1.25,
+                        marginTop: "0.9rem",
+                        marginBottom: 0,
+                      }}
+                    >
+                      {article.title}
+                    </h3>
+                  </div>
+
                   <span
                     style={{
                       display: "inline-flex",
                       alignItems: "center",
-                      padding: "3px 10px",
-                      fontSize: "10px",
-                      fontWeight: 700,
-                      letterSpacing: "0.12em",
-                      textTransform: "uppercase",
-                      backgroundColor: "#F3E7C8",
-                      color: "#8A650F",
-                      borderRadius: "3px",
+                      gap: "4px",
+                      marginTop: "1.1rem",
                       fontFamily: "'Inter', sans-serif",
-                    }}
-                  >
-                    {article.publication_date ? new Date(article.publication_date).toLocaleDateString() : "Recently"}
-                  </span>
-
-                  <h3
-                    style={{
-                      fontFamily: "'Cormorant Garamond', Georgia, serif",
-                      fontSize: "1.35rem",
+                      fontSize: "12px",
                       fontWeight: 600,
                       color: "#111111",
-                      lineHeight: 1.25,
-                      marginTop: "0.9rem",
-                      marginBottom: 0,
                     }}
                   >
-                    {article.title}
-                  </h3>
-
-                  <p
-                    style={{
-                      fontFamily: "'Inter', sans-serif",
-                      fontSize: "13px",
-                      color: "#6B7280",
-                      lineHeight: 1.7,
-                      marginTop: "0.65rem",
-                      display: "-webkit-box",
-                      WebkitLineClamp: 3,
-                      WebkitBoxOrient: "vertical",
-                      overflow: "hidden"
-                    }}
-                  >
-                    {article.description}
-                  </p>
+                    Read More <span style={{ color: "#B8871B", fontSize: "14px" }}>›</span>
+                  </span>
                 </div>
-
-                <Link
-                  to={`/articles/${article.id}`}
-                  style={{
-                    display: "inline-flex",
-                    alignItems: "center",
-                    gap: "4px",
-                    marginTop: "1.1rem",
-                    fontFamily: "'Inter', sans-serif",
-                    fontSize: "12px",
-                    fontWeight: 600,
-                    color: "#111111",
-                    textDecoration: "none",
-                  }}
-                >
-                  Read More <span style={{ color: "#B8871B", fontSize: "14px" }}>›</span>
-                </Link>
-              </div>
+              </Link>
             </article>
           ))}
         </div>

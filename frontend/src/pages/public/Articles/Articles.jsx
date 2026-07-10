@@ -175,56 +175,56 @@ function Articles() {
                         e.currentTarget.style.boxShadow = "0 4px 6px rgba(0,0,0,0.02)";
                       }}
                     >
-                      {item.image && (
-                        <div style={{ backgroundColor: "#F8F6F1", overflow: "hidden", display: "flex", justifyContent: "center", alignItems: "center" }}>
-                          <img
-                            src={getImageUrl(item.image)}
-                            alt={item.title}
-                            style={{ width: "100%", height: "auto", display: "block", transition: "transform 0.5s ease" }}
-                            onMouseEnter={(e) => e.currentTarget.style.transform = "scale(1.03)"}
-                            onMouseLeave={(e) => e.currentTarget.style.transform = "scale(1)"}
-                          />
-                        </div>
-                      )}
-                      <div style={{ padding: "2rem", display: "flex", flexDirection: "column", flex: 1 }}>
-                        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "1rem" }}>
-                          <span style={{ fontSize: "11px", fontWeight: 700, letterSpacing: "0.1em", textTransform: "uppercase", color: "#B8871B" }}>
-                            {activeTab === "articles" ? "Article" : "Blog"}
-                          </span>
-                          <span style={{ fontSize: "12px", color: "#9CA3AF", fontFamily: "'Inter', sans-serif" }}>
-                            {item.publication_date ? new Date(item.publication_date).toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' }) : "Recently"}
-                          </span>
-                        </div>
-                        <h2 style={{ fontFamily: "'Cormorant Garamond', Georgia, serif", fontSize: "1.75rem", fontWeight: 600, color: "#111111", margin: "0 0 1rem", lineHeight: 1.2 }}>
-                          {item.title}
-                        </h2>
-                        <p style={{ fontFamily: "'Inter', sans-serif", fontSize: "14px", color: "#4B5563", lineHeight: 1.7, flex: 1, marginBottom: "1.5rem" }}>
-                          {item.description || item.content?.substring(0, 150) + "..."}
-                        </p>
-                        
-                        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", borderTop: "1px solid #F3F4F6", paddingTop: "1.5rem" }}>
-                          {item.author && (
-                            <span style={{ fontSize: "13px", color: "#6B7280", fontWeight: 500, fontFamily: "'Inter', sans-serif" }}>
-                              By <span style={{ color: "#111111" }}>{item.author}</span>
+                      <Link 
+                        to={`/${activeTab}/${item.id}`} 
+                        style={{ textDecoration: "none", color: "inherit", display: "flex", flexDirection: "column", height: "100%", flex: 1 }}
+                      >
+                        {item.image && (
+                          <div style={{ backgroundColor: "#F8F6F1", overflow: "hidden", display: "flex", justifyContent: "center", alignItems: "center" }}>
+                            <img
+                              src={getImageUrl(item.image)}
+                              alt={item.title}
+                              style={{ width: "100%", height: "auto", display: "block", transition: "transform 0.5s ease" }}
+                              onMouseEnter={(e) => e.currentTarget.style.transform = "scale(1.03)"}
+                              onMouseLeave={(e) => e.currentTarget.style.transform = "scale(1)"}
+                            />
+                          </div>
+                        )}
+                        <div style={{ padding: "2rem", display: "flex", flexDirection: "column", flex: 1 }}>
+                          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "1rem" }}>
+                            <span style={{ fontSize: "11px", fontWeight: 700, letterSpacing: "0.1em", textTransform: "uppercase", color: "#B8871B" }}>
+                              {activeTab === "articles" ? "Article" : "Blog"}
                             </span>
-                          )}
-                          <Link
-                            to={`/${activeTab}/${item.id}`}
-                            style={{
-                              fontFamily: "'Inter', sans-serif",
-                              fontSize: "13px",
-                              fontWeight: 600,
-                              color: "#B8871B",
-                              textDecoration: "none",
-                              display: "inline-flex",
-                              alignItems: "center",
-                              gap: "4px"
-                            }}
-                          >
-                            Read Full <span style={{ fontSize: "16px" }}>→</span>
-                          </Link>
+                            <span style={{ fontSize: "12px", color: "#9CA3AF", fontFamily: "'Inter', sans-serif" }}>
+                              {item.publication_date ? new Date(item.publication_date).toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' }) : "Recently"}
+                            </span>
+                          </div>
+                          <h2 style={{ fontFamily: "'Cormorant Garamond', Georgia, serif", fontSize: "1.75rem", fontWeight: 600, color: "#111111", margin: "0 0 1rem", lineHeight: 1.2 }}>
+                            {item.title}
+                          </h2>
+                          
+                          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", borderTop: "1px solid #F3F4F6", paddingTop: "1.5rem", marginTop: "auto" }}>
+                            {item.author && (
+                              <span style={{ fontSize: "13px", color: "#6B7280", fontWeight: 500, fontFamily: "'Inter', sans-serif" }}>
+                                By <span style={{ color: "#111111" }}>{item.author}</span>
+                              </span>
+                            )}
+                            <span
+                              style={{
+                                fontFamily: "'Inter', sans-serif",
+                                fontSize: "13px",
+                                fontWeight: 600,
+                                color: "#B8871B",
+                                display: "inline-flex",
+                                alignItems: "center",
+                                gap: "4px"
+                              }}
+                            >
+                              Read Full <span style={{ fontSize: "16px" }}>→</span>
+                            </span>
+                          </div>
                         </div>
-                      </div>
+                      </Link>
                     </motion.article>
                   ))}
                 </motion.div>

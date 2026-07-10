@@ -39,7 +39,7 @@ def get_article(article_id: int, db: Session = Depends(get_db)):
 def create_article(
     title: str = Form(...),
     publication_date: Optional[datetime] = Form(None),
-    description: str = Form(...),
+    description: Optional[str] = Form(""),
     content: str = Form(...),
     author: Optional[str] = Form(None),
     status_val: ArticleStatus = Form(ArticleStatus.Draft, alias="status"),
