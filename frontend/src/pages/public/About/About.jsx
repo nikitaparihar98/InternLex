@@ -126,13 +126,13 @@ function About() {
             transition={{ duration: 0.5, ease: "easeOut" }}
             style={{ marginBottom: "8rem" }}
           >
-            <div style={{ display: "grid", gridTemplateColumns: "1fr", gap: "2.5rem" }}>
+            <div style={{ display: "flex", flexDirection: "column", gap: "2.5rem", minWidth: 0, width: "100%" }}>
               <motion.div 
                 whileHover={{ y: -8, boxShadow: "0 20px 50px rgba(217, 119, 6, 0.2), 0 0 25px rgba(217, 119, 6, 0.3)", borderColor: "#D97706" }}
                 transition={{ duration: 0.2, ease: "easeOut" }}
-                style={{ backgroundColor: "#FFFFFF", border: "1px solid #E5E0D8", borderLeft: "6px solid #B8871B", borderRadius: "16px", padding: "3rem", width: "100%", boxShadow: "0 10px 30px rgba(0, 0, 0, 0.05)", transition: "border-color 0.2s ease" }}
+                style={{ backgroundColor: "#FFFFFF", border: "1px solid #E5E0D8", borderLeft: "6px solid #B8871B", borderRadius: "16px", padding: "clamp(1.5rem, 5vw, 3rem)", width: "100%", boxShadow: "0 10px 30px rgba(0, 0, 0, 0.05)", transition: "border-color 0.2s ease", boxSizing: "border-box" }}
               >
-                <h2 style={{ fontFamily: "'Cormorant Garamond', Georgia, serif", fontSize: "2.8rem", fontWeight: 700, color: "#111111", margin: "0 0 1.5rem" }}>
+                <h2 style={{ fontFamily: "'Cormorant Garamond', Georgia, serif", fontSize: "clamp(1.8rem, 6vw, 2.8rem)", fontWeight: 700, color: "#111111", margin: "0 0 1.5rem", lineHeight: 1.2 }}>
                   The Team Behind InternLex
                 </h2>
                 <p style={{ fontFamily: "'Inter', sans-serif", fontSize: "16px", color: "#6B7280", lineHeight: 1.7 }}>
@@ -140,16 +140,16 @@ function About() {
                 </p>
               </motion.div>
 
-              <div style={{ display: "flex", alignItems: "center", gap: "1rem", marginTop: "1rem", position: "relative" }}>
+              <div style={{ display: "flex", alignItems: "center", gap: "1rem", marginTop: "1rem", position: "relative", minWidth: 0, width: "100%" }}>
                 
                 {/* Left Navigation Arrow */}
                 <button className="hidden md:flex" onClick={scrollLeft} style={{ flexShrink: 0, width: "40px", height: "40px", borderRadius: "50%", backgroundColor: "#FFFFFF", border: "1px solid #E5E0D8", alignItems: "center", justifyContent: "center", cursor: "pointer", boxShadow: "0 4px 10px rgba(0,0,0,0.05)", transition: "all 0.2s ease" }} onMouseEnter={(e) => { e.currentTarget.style.borderColor = "#B8871B"; e.currentTarget.style.color = "#B8871B"; }} onMouseLeave={(e) => { e.currentTarget.style.borderColor = "#E5E0D8"; e.currentTarget.style.color = "#111111"; }}>
                   <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
                 </button>
-
+ 
                 <div 
                   ref={sliderRef}
-                  style={{ display: "flex", flex: 1, overflowX: "auto", scrollSnapType: "x mandatory", gap: "1.5rem", paddingBottom: "1rem", scrollbarWidth: "none", msOverflowStyle: "none" }}
+                  style={{ display: "flex", flex: 1, overflowX: "auto", scrollSnapType: "x mandatory", gap: "1.5rem", paddingBottom: "1rem", scrollbarWidth: "none", msOverflowStyle: "none", minWidth: 0 }}
                   className="hide-scrollbar"
                 >
                   <style>{`.hide-scrollbar::-webkit-scrollbar { display: none; }`}</style>
@@ -221,15 +221,15 @@ function About() {
               </h2>
             </div>
             
-            <div style={{ display: "flex", alignItems: "center", gap: "1rem", position: "relative" }}>
+            <div style={{ display: "flex", alignItems: "center", gap: "1rem", position: "relative", minWidth: 0, width: "100%" }}>
               {/* Left Navigation Arrow */}
               <button className="hidden md:flex" onClick={scrollTestLeft} style={{ flexShrink: 0, width: "40px", height: "40px", borderRadius: "50%", backgroundColor: "#FFFFFF", border: "1px solid #E5E0D8", alignItems: "center", justifyContent: "center", cursor: "pointer", boxShadow: "0 4px 10px rgba(0,0,0,0.05)", transition: "all 0.2s ease" }} onMouseEnter={(e) => { e.currentTarget.style.borderColor = "#B8871B"; e.currentTarget.style.color = "#B8871B"; }} onMouseLeave={(e) => { e.currentTarget.style.borderColor = "#E5E0D8"; e.currentTarget.style.color = "#111111"; }}>
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
               </button>
-
+ 
               <div 
                 ref={testSliderRef}
-                style={{ display: "flex", flex: 1, overflowX: "auto", scrollSnapType: "x mandatory", gap: "2rem", paddingBottom: "1rem", paddingTop: "1rem", scrollbarWidth: "none", msOverflowStyle: "none" }}
+                style={{ display: "flex", flex: 1, overflowX: "auto", scrollSnapType: "x mandatory", gap: "2rem", paddingBottom: "1rem", paddingTop: "1rem", scrollbarWidth: "none", msOverflowStyle: "none", minWidth: 0 }}
                 className="hide-scrollbar"
               >
               {[
