@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { getArticles, getBlogs } from "../../../services/contentApi";
 import { getImageUrl } from "../../../utils/imageUrl";
-import { API_URL } from "../../../services/api";
 import Footer from "../../../components/layout/Footer";
 
 function Articles() {

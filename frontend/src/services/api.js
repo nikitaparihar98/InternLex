@@ -15,21 +15,46 @@ api.interceptors.request.use(
     }
     return config;
   },
-  (error) => Promise.reject(error)
+  (error) => {
+    console.error("API Request Error:", {
+      message: error.message,
+      stack: error.stack,
+    });
+    return Promise.reject(error);
+  }
 );
 
-// Response Interceptor: Handle 401 Unauthorized globally
+// Response Interceptor: Handle errors and log detailed diagnostics
 api.interceptors.response.use(
   (response) => response,
   (error) => {
-    if (error.response && error.response.status === 401) {
-      // If unauthorized, clear the token and reload to clear state
-      // (The AuthContext will handle standard routing, but this is a fallback for deep links)
-      if (localStorage.getItem("token")) {
-        localStorage.removeItem("token");
-        window.location.href = "/login";
+    const diagnostics = {
+      message: error.message,
+      url: error.config?.url ? `${error.config.baseURL || ""}${error.config.url}` : null,
+      method: error.config?.method?.toUpperCase(),
+      headers: error.config?.headers,
+      payload: error.config?.data,
+    };
+
+    if (error.response) {
+      diagnostics.status = error.response.status;
+      diagnostics.responseData = error.response.data;
+      console.error("API Response Error:", diagnostics);
+
+      if (error.response.status === 401) {
+        if (localStorage.getItem("token")) {
+          localStorage.removeItem("token");
+          // Redirect to correct admin route
+          window.location.href = "/admin";
+        }
       }
+    } else if (error.request) {
+      diagnostics.request = "No response received. This typically points to a CORS block, a DNS failure (e.g. host not found), or a blocked request (e.g. by privacy shields or ad-blockers).";
+      console.error("API Network Error (No Response):", diagnostics);
+    } else {
+      console.error("API General Error:", error.message);
     }
+
     return Promise.reject(error);
   }
 );

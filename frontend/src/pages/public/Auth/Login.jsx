@@ -35,7 +35,11 @@ function Login() {
           errorMsg = JSON.stringify(err.response.data.detail);
         }
       } else if (err.message) {
-        errorMsg = err.message;
+        if (err.message === "Network Error") {
+          errorMsg = "Network Error: Could not connect to the backend server. Please check your internet, verify that your ad-blocker or browser shields aren't blocking the api, or check server status.";
+        } else {
+          errorMsg = err.message;
+        }
       }
       toast.error(errorMsg);
     } finally {
