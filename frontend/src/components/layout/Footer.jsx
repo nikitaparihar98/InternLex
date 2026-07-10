@@ -90,7 +90,7 @@ function Footer() {
             <ul style={{ listStyle: "none", padding: 0, margin: 0, display: "flex", flexDirection: "column", gap: "16px" }}>
               <li>
                 <a href="https://www.instagram.com/internlex?igsh=MXhpeGpsaHFndGpxbA%3D%3D" target="_blank" rel="noreferrer" style={{ ...footerLink, display: "flex", alignItems: "center", gap: "10px" }} onMouseEnter={(e) => e.currentTarget.style.color = "#FFFFFF"} onMouseLeave={(e) => e.currentTarget.style.color = "#9CA3AF"}>
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#D4A843" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#D4A843" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0 }}>
                     <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
                     <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
                     <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
@@ -100,7 +100,7 @@ function Footer() {
               </li>
               <li>
                 <a href="https://youtube.com/@internlex?si=ANIQ_Deevgq0oVrY" target="_blank" rel="noreferrer" style={{ ...footerLink, display: "flex", alignItems: "center", gap: "10px" }} onMouseEnter={(e) => e.currentTarget.style.color = "#FFFFFF"} onMouseLeave={(e) => e.currentTarget.style.color = "#9CA3AF"}>
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#D4A843" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#D4A843" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0 }}>
                     <path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33 2.78 2.78 0 0 0 1.94 2c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.33 29 29 0 0 0-.46-5.33z"/>
                     <polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"/>
                   </svg>
@@ -109,7 +109,7 @@ function Footer() {
               </li>
               <li>
                 <a href="https://whatsapp.com/channel/0029VbCGfQ3DTkK73tPQPJ3C" target="_blank" rel="noreferrer" style={{ ...footerLink, display: "flex", alignItems: "center", gap: "10px" }} onMouseEnter={(e) => e.currentTarget.style.color = "#FFFFFF"} onMouseLeave={(e) => e.currentTarget.style.color = "#9CA3AF"}>
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#D4A843" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#D4A843" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0 }}>
                     <path d="M3 21l1.65-3.8a9 9 0 1 1 3.4 3.4L3 21"/>
                     <path d="M9 10a.5.5 0 0 0 1 0V9a.5.5 0 0 0-1 0v1a5 5 0 0 0 5 5h1a.5.5 0 0 0 0-1h-1a.5.5 0 0 0 0 1"/>
                   </svg>
@@ -118,7 +118,7 @@ function Footer() {
               </li>
               <li>
                 <a href="mailto:team.internlex@gmail.com" style={{ ...footerLink, display: "flex", alignItems: "center", gap: "10px" }} onMouseEnter={(e) => e.currentTarget.style.color = "#FFFFFF"} onMouseLeave={(e) => e.currentTarget.style.color = "#9CA3AF"}>
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#D4A843" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#D4A843" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0 }}>
                     <rect width="20" height="16" x="2" y="4" rx="2" />
                     <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
                   </svg>
@@ -127,7 +127,7 @@ function Footer() {
               </li>
               <li>
                 <a href="https://www.linkedin.com/company/internlex/" target="_blank" rel="noreferrer" style={{ ...footerLink, display: "flex", alignItems: "center", gap: "10px" }} onMouseEnter={(e) => e.currentTarget.style.color = "#FFFFFF"} onMouseLeave={(e) => e.currentTarget.style.color = "#9CA3AF"}>
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#D4A843" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#D4A843" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0 }}>
                     <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/>
                     <rect x="2" y="9" width="4" height="12"/>
                     <circle cx="4" cy="4" r="2"/>
@@ -160,7 +160,7 @@ function Footer() {
               margin: 0,
             }}
           >
-            © 2026 InternLex. All rights reserved. Professional Legal Consultancy.
+            © 2026 InternLex. All rights reserved. Legal Education and Skill Development Platform.
           </p>
           <div style={{ display: "flex" }}>
             <Link
