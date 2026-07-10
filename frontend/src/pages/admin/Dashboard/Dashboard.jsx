@@ -66,7 +66,7 @@ function Dashboard() {
           Dashboard
         </p>
 
-        <h1 style={{ fontFamily: "'Cormorant Garamond', Georgia, serif", fontSize: "3rem", fontWeight: 600, color: "#111111", margin: 0 }}>
+        <h1 style={{ fontFamily: "'Cormorant Garamond', Georgia, serif", fontSize: "clamp(2rem, 7vw, 3rem)", fontWeight: 600, color: "#111111", margin: 0 }}>
           Welcome back, Admin
         </h1>
 
@@ -100,9 +100,9 @@ function Dashboard() {
             ))}
           </div>
 
-          <div style={{ display: "grid", gridTemplateColumns: "2fr 1fr", gap: "1.5rem" }}>
+          <div className="grid grid-cols-1 lg:grid-cols-3" style={{ gap: "1.5rem" }}>
             
-            <div style={{ display: "flex", flexDirection: "column", gap: "1.5rem" }}>
+            <div className="lg:col-span-2" style={{ display: "flex", flexDirection: "column", gap: "1.5rem" }}>
               {/* Removed Recent Applications */}
 
               {/* Recent Opportunities */}

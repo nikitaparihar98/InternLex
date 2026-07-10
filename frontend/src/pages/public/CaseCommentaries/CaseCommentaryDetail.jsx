@@ -46,7 +46,7 @@ function CaseCommentaryDetail() {
   return (
     <>
       <main style={{ minHeight: "100vh", backgroundColor: "#FFFFFF", paddingTop: "120px", paddingBottom: "80px" }}>
-        <article style={{ maxWidth: "800px", margin: "0 auto", padding: "0 2.5rem" }}>
+        <article style={{ maxWidth: "800px", margin: "0 auto", padding: "0 clamp(1rem, 4vw, 2.5rem)" }}>
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -65,7 +65,7 @@ function CaseCommentaryDetail() {
               </span>
             </div>
 
-            <h1 style={{ fontFamily: "'Cormorant Garamond', Georgia, serif", fontSize: "3.5rem", fontWeight: 600, color: "#111111", margin: "0 0 1rem", lineHeight: 1.1 }}>
+            <h1 style={{ fontFamily: "'Cormorant Garamond', Georgia, serif", fontSize: "clamp(2rem, 7vw, 3.5rem)", fontWeight: 600, color: "#111111", margin: "0 0 1rem", lineHeight: 1.1 }}>
               {commentary.title}
             </h1>
             

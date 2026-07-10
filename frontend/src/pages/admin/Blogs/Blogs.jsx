@@ -112,12 +112,12 @@ function Blogs() {
 
   return (
     <AdminLayout>
-      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-end", marginBottom: "2rem" }}>
+      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-end gap-4" style={{ marginBottom: "2rem" }}>
         <div>
           <p style={{ fontFamily: "'Inter', sans-serif", fontSize: "11px", fontWeight: 600, letterSpacing: "0.28em", textTransform: "uppercase", color: "#B8871B", marginBottom: "0.5rem" }}>
             Content Management
           </p>
-          <h1 style={{ fontFamily: "'Cormorant Garamond', Georgia, serif", fontSize: "3rem", fontWeight: 600, color: "#111111", margin: 0 }}>
+          <h1 style={{ fontFamily: "'Cormorant Garamond', Georgia, serif", fontSize: "clamp(2rem, 7vw, 3rem)", fontWeight: 600, color: "#111111", margin: 0 }}>
             Blogs
           </h1>
           <p style={{ fontFamily: "'Inter', sans-serif", fontSize: "14px", color: "#6B7280", marginTop: "0.5rem" }}>
@@ -136,7 +136,7 @@ function Blogs() {
       </div>
 
       {isModalOpen && (
-        <div style={{ backgroundColor: "#FFFFFF", border: "1px solid #DDD5C5", padding: "2rem", marginBottom: "2rem" }}>
+        <div className="p-4 sm:p-8" style={{ backgroundColor: "#FFFFFF", border: "1px solid #DDD5C5", marginBottom: "2rem" }}>
           <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "1.5rem" }}>
             <h2 style={{ fontFamily: "'Cormorant Garamond', Georgia, serif", fontSize: "2rem", fontWeight: 600, color: "#111111", margin: 0 }}>
               {editId ? "Edit Blog" : "Create New Blog"}
@@ -145,7 +145,7 @@ function Blogs() {
           </div>
           
           <form onSubmit={handleSubmit} style={{ display: "flex", flexDirection: "column", gap: "1.25rem" }}>
-            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "1.25rem" }}>
+            <div className="grid grid-cols-1 md:grid-cols-2" style={{ gap: "1.25rem" }}>
               <div>
                 <label style={{ display: "block", fontFamily: "'Inter', sans-serif", fontSize: "11px", fontWeight: 600, letterSpacing: "0.05em", color: "#333333", marginBottom: "0.5rem", textTransform: "uppercase" }}>Title *</label>
                 <input required type="text" name="title" value={formData.title} onChange={handleInputChange} style={{ width: "100%", border: "1px solid #DDD5C5", padding: "0.75rem", fontFamily: "'Inter', sans-serif", fontSize: "14px", outline: "none" }} />
@@ -156,7 +156,7 @@ function Blogs() {
               </div>
             </div>
 
-            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "1.25rem" }}>
+            <div className="grid grid-cols-1 md:grid-cols-2" style={{ gap: "1.25rem" }}>
               <div>
                 <label style={{ display: "block", fontFamily: "'Inter', sans-serif", fontSize: "11px", fontWeight: 600, letterSpacing: "0.05em", color: "#333333", marginBottom: "0.5rem", textTransform: "uppercase" }}>Publication Date</label>
                 <input type="date" name="publication_date" value={formData.publication_date} onChange={handleInputChange} style={{ width: "100%", border: "1px solid #DDD5C5", padding: "0.75rem", fontFamily: "'Inter', sans-serif", fontSize: "14px", outline: "none" }} />

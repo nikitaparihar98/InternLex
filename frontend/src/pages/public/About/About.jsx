@@ -56,9 +56,9 @@ function About() {
   return (
     <>
       <main style={{ backgroundColor: "#FDFBF7", color: "#111111", minHeight: "100vh", paddingTop: "140px", paddingBottom: "100px" }}>
-        <section style={{ maxWidth: "1280px", margin: "0 auto", padding: "0 2.5rem" }}>
+        <section style={{ maxWidth: "1280px", margin: "0 auto", padding: "0 clamp(1rem, 5vw, 2.5rem)", overflow: "hidden" }}>
           
-          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "4rem", marginBottom: "4rem", alignItems: "start" }}>
+          <div className="grid grid-cols-1 md:grid-cols-2" style={{ gap: "4rem", marginBottom: "4rem", alignItems: "start" }}>
             {/* Top Left: Title */}
             <motion.div variants={containerVariants} initial="hidden" animate="visible">
               <motion.h1 variants={itemVariants} style={{ fontFamily: "'Cormorant Garamond', Georgia, serif", fontSize: "clamp(3rem, 5vw, 4.5rem)", fontWeight: 600, lineHeight: 1.1, color: "#111111", margin: "0 0 2rem" }}>
@@ -84,7 +84,7 @@ function About() {
             </motion.div>
           </div>
 
-          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "4rem", marginBottom: "4rem" }}>
+          <div className="grid grid-cols-1 md:grid-cols-2" style={{ gap: "4rem", marginBottom: "4rem" }}>
             {/* Bottom Left: Why InternLex */}
             <motion.div 
               initial={{ opacity: 0, y: 30, boxShadow: "0 0 0px rgba(217, 119, 6, 0)" }} 
@@ -143,7 +143,7 @@ function About() {
               <div style={{ display: "flex", alignItems: "center", gap: "1rem", marginTop: "1rem", position: "relative" }}>
                 
                 {/* Left Navigation Arrow */}
-                <button onClick={scrollLeft} style={{ flexShrink: 0, width: "40px", height: "40px", borderRadius: "50%", backgroundColor: "#FFFFFF", border: "1px solid #E5E0D8", display: "flex", alignItems: "center", justifyContent: "center", cursor: "pointer", boxShadow: "0 4px 10px rgba(0,0,0,0.05)", transition: "all 0.2s ease" }} onMouseEnter={(e) => { e.currentTarget.style.borderColor = "#B8871B"; e.currentTarget.style.color = "#B8871B"; }} onMouseLeave={(e) => { e.currentTarget.style.borderColor = "#E5E0D8"; e.currentTarget.style.color = "#111111"; }}>
+                <button className="hidden md:flex" onClick={scrollLeft} style={{ flexShrink: 0, width: "40px", height: "40px", borderRadius: "50%", backgroundColor: "#FFFFFF", border: "1px solid #E5E0D8", alignItems: "center", justifyContent: "center", cursor: "pointer", boxShadow: "0 4px 10px rgba(0,0,0,0.05)", transition: "all 0.2s ease" }} onMouseEnter={(e) => { e.currentTarget.style.borderColor = "#B8871B"; e.currentTarget.style.color = "#B8871B"; }} onMouseLeave={(e) => { e.currentTarget.style.borderColor = "#E5E0D8"; e.currentTarget.style.color = "#111111"; }}>
                   <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
                 </button>
 
@@ -200,7 +200,7 @@ function About() {
                 </div>
                 
                 {/* Right Navigation Arrow */}
-                <button onClick={scrollRight} style={{ flexShrink: 0, width: "40px", height: "40px", borderRadius: "50%", backgroundColor: "#FFFFFF", border: "1px solid #E5E0D8", display: "flex", alignItems: "center", justifyContent: "center", cursor: "pointer", boxShadow: "0 4px 10px rgba(0,0,0,0.05)", transition: "all 0.2s ease" }} onMouseEnter={(e) => { e.currentTarget.style.borderColor = "#B8871B"; e.currentTarget.style.color = "#B8871B"; }} onMouseLeave={(e) => { e.currentTarget.style.borderColor = "#E5E0D8"; e.currentTarget.style.color = "#111111"; }}>
+                <button className="hidden md:flex" onClick={scrollRight} style={{ flexShrink: 0, width: "40px", height: "40px", borderRadius: "50%", backgroundColor: "#FFFFFF", border: "1px solid #E5E0D8", alignItems: "center", justifyContent: "center", cursor: "pointer", boxShadow: "0 4px 10px rgba(0,0,0,0.05)", transition: "all 0.2s ease" }} onMouseEnter={(e) => { e.currentTarget.style.borderColor = "#B8871B"; e.currentTarget.style.color = "#B8871B"; }} onMouseLeave={(e) => { e.currentTarget.style.borderColor = "#E5E0D8"; e.currentTarget.style.color = "#111111"; }}>
                   <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M9 18l6-6-6-6"/></svg>
                 </button>
 
@@ -223,7 +223,7 @@ function About() {
             
             <div style={{ display: "flex", alignItems: "center", gap: "1rem", position: "relative" }}>
               {/* Left Navigation Arrow */}
-              <button onClick={scrollTestLeft} style={{ flexShrink: 0, width: "40px", height: "40px", borderRadius: "50%", backgroundColor: "#FFFFFF", border: "1px solid #E5E0D8", display: "flex", alignItems: "center", justifyContent: "center", cursor: "pointer", boxShadow: "0 4px 10px rgba(0,0,0,0.05)", transition: "all 0.2s ease" }} onMouseEnter={(e) => { e.currentTarget.style.borderColor = "#B8871B"; e.currentTarget.style.color = "#B8871B"; }} onMouseLeave={(e) => { e.currentTarget.style.borderColor = "#E5E0D8"; e.currentTarget.style.color = "#111111"; }}>
+              <button className="hidden md:flex" onClick={scrollTestLeft} style={{ flexShrink: 0, width: "40px", height: "40px", borderRadius: "50%", backgroundColor: "#FFFFFF", border: "1px solid #E5E0D8", alignItems: "center", justifyContent: "center", cursor: "pointer", boxShadow: "0 4px 10px rgba(0,0,0,0.05)", transition: "all 0.2s ease" }} onMouseEnter={(e) => { e.currentTarget.style.borderColor = "#B8871B"; e.currentTarget.style.color = "#B8871B"; }} onMouseLeave={(e) => { e.currentTarget.style.borderColor = "#E5E0D8"; e.currentTarget.style.color = "#111111"; }}>
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
               </button>
 
@@ -304,13 +304,13 @@ function About() {
                   whileHover={{ y: -6, boxShadow: "0 25px 50px rgba(217, 119, 6, 0.2), 0 0 20px rgba(217, 119, 6, 0.1)", borderColor: "#D97706" }}
                   style={{ 
                     flex: "0 0 calc(33.333% - 1.33rem)",
-                    minWidth: "420px",
+                    minWidth: "clamp(280px, 85vw, 420px)",
                     scrollSnapAlign: "start",
                     backgroundColor: "#FFFFFF", 
                     border: "3px solid #B8871B", 
                     borderTop: "8px solid #B8871B", 
                     borderRadius: "12px", 
-                    padding: "1.8rem 2.5rem", 
+                    padding: "1.8rem clamp(1rem, 5vw, 2.5rem)", 
                     position: "relative", 
                     transition: "all 0.3s ease",
                     boxShadow: "0 10px 30px rgba(0,0,0,0.08)"
@@ -337,7 +337,7 @@ function About() {
               </div>
 
               {/* Right Navigation Arrow */}
-              <button onClick={scrollTestRight} style={{ flexShrink: 0, width: "40px", height: "40px", borderRadius: "50%", backgroundColor: "#FFFFFF", border: "1px solid #E5E0D8", display: "flex", alignItems: "center", justifyContent: "center", cursor: "pointer", boxShadow: "0 4px 10px rgba(0,0,0,0.05)", transition: "all 0.2s ease" }} onMouseEnter={(e) => { e.currentTarget.style.borderColor = "#B8871B"; e.currentTarget.style.color = "#B8871B"; }} onMouseLeave={(e) => { e.currentTarget.style.borderColor = "#E5E0D8"; e.currentTarget.style.color = "#111111"; }}>
+              <button className="hidden md:flex" onClick={scrollTestRight} style={{ flexShrink: 0, width: "40px", height: "40px", borderRadius: "50%", backgroundColor: "#FFFFFF", border: "1px solid #E5E0D8", alignItems: "center", justifyContent: "center", cursor: "pointer", boxShadow: "0 4px 10px rgba(0,0,0,0.05)", transition: "all 0.2s ease" }} onMouseEnter={(e) => { e.currentTarget.style.borderColor = "#B8871B"; e.currentTarget.style.color = "#B8871B"; }} onMouseLeave={(e) => { e.currentTarget.style.borderColor = "#E5E0D8"; e.currentTarget.style.color = "#111111"; }}>
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M9 18l6-6-6-6"/></svg>
               </button>
             </div>

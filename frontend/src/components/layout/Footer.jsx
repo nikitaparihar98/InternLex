@@ -25,7 +25,7 @@ function Footer() {
         style={{
           maxWidth: "1280px",
           margin: "0 auto",
-          padding: "3rem 2.5rem 1rem",
+          padding: "3rem clamp(1rem, 5vw, 2.5rem) 1rem",
         }}
       >
         {/* 3-column flex container */}
@@ -34,12 +34,12 @@ function Footer() {
             display: "flex",
             flexWrap: "wrap",
             justifyContent: "space-between",
-            gap: "2.5rem",
+            gap: "2rem",
             paddingBottom: "2.5rem",
           }}
         >
           {/* Brand column */}
-          <div style={{ flex: "2 1 350px", maxWidth: "450px" }}>
+          <div style={{ flex: "1 1 260px", maxWidth: "450px", minWidth: 0 }}>
             <div>
               <Link
                 to="/"
@@ -75,7 +75,7 @@ function Footer() {
           </div>
 
           {/* Explore */}
-          <div style={{ flex: "1 1 150px" }}>
+          <div style={{ flex: "1 1 120px", minWidth: 0 }}>
             <p style={colHeading}>Explore</p>
             <ul style={{ listStyle: "none", padding: 0, margin: 0, display: "flex", flexDirection: "column", gap: "16px" }}>
               <li><Link to="/articles" style={footerLink} onMouseEnter={(e) => e.currentTarget.style.color = "#FFFFFF"} onMouseLeave={(e) => e.currentTarget.style.color = "#9CA3AF"}>Legal Articles</Link></li>
@@ -85,7 +85,7 @@ function Footer() {
           </div>
 
           {/* Contact */}
-          <div style={{ flex: "1 1 200px" }}>
+          <div style={{ flex: "1 1 160px", minWidth: 0 }}>
             <p style={colHeading}>Contact</p>
             <ul style={{ listStyle: "none", padding: 0, margin: 0, display: "flex", flexDirection: "column", gap: "16px" }}>
               <li>
@@ -142,12 +142,13 @@ function Footer() {
         <div
           style={{
             borderTop: "1px solid #333333",
-            paddingTop: "2rem",
+            paddingTop: "1.5rem",
+            paddingBottom: "1rem",
             display: "flex",
             alignItems: "center",
             justifyContent: "space-between",
             flexWrap: "wrap",
-            gap: "1rem"
+            gap: "0.75rem"
           }}
         >
           <p

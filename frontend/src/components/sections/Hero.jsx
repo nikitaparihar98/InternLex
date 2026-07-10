@@ -58,7 +58,7 @@ function Hero() {
           zIndex: 10,
           maxWidth: "1280px",
           margin: "0 auto",
-          padding: "0 2.5rem",
+          padding: "0 clamp(1rem, 5vw, 2.5rem)",
           paddingTop: "80px",
           width: "100%",
         }}

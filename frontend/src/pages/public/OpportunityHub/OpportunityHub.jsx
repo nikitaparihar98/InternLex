@@ -50,13 +50,13 @@ function OpportunityHub() {
   return (
     <>
       <section style={{ backgroundColor: "#F5F1EA", minHeight: "100vh", paddingTop: "140px", paddingBottom: "100px" }}>
-        <div style={{ maxWidth: "1280px", margin: "0 auto", padding: "0 2.5rem" }}>
+        <div style={{ maxWidth: "1280px", margin: "0 auto", padding: "0 clamp(1rem, 5vw, 2.5rem)" }}>
           
           <div style={{ marginBottom: "3rem", maxWidth: "700px" }}>
             <p style={{ fontFamily: "'Inter', sans-serif", fontSize: "11px", fontWeight: 600, letterSpacing: "0.28em", textTransform: "uppercase", color: "#D4A843", marginBottom: "1rem" }}>
               Opportunity Hub
             </p>
-            <h1 style={{ fontFamily: "'Cormorant Garamond', Georgia, serif", fontSize: "3.5rem", fontWeight: 600, color: "#111111", margin: "0 0 1.5rem", lineHeight: 1.1 }}>
+            <h1 style={{ fontFamily: "'Cormorant Garamond', Georgia, serif", fontSize: "clamp(2.25rem, 8vw, 3.5rem)", fontWeight: 600, color: "#111111", margin: "0 0 1.5rem", lineHeight: 1.1 }}>
               Explore Legal Opportunities
             </h1>
             <p style={{ fontFamily: "'Inter', sans-serif", fontSize: "15px", color: "#6B7280", lineHeight: 1.75 }}>
@@ -64,7 +64,7 @@ function OpportunityHub() {
             </p>
           </div>
 
-          <div style={{ backgroundColor: "#FFFFFF", border: "1px solid #DDD5C5", padding: "1.25rem", marginBottom: "2rem", display: "flex", gap: "1rem" }}>
+          <div className="flex flex-col sm:flex-row" style={{ backgroundColor: "#FFFFFF", border: "1px solid #DDD5C5", padding: "1.25rem", marginBottom: "2rem", gap: "1rem" }}>
             <input
               placeholder="Search opportunities..."
               value={search}
@@ -76,7 +76,8 @@ function OpportunityHub() {
             <select 
               value={filterType}
               onChange={(e) => setFilterType(e.target.value)}
-              style={{ width: "200px", border: "1px solid #DDD5C5", padding: "0.75rem 1.25rem", fontFamily: "'Inter', sans-serif", fontSize: "14px", outline: "none", backgroundColor: "#FFFFFF", color: "#6B7280" }} 
+              className="w-full sm:w-[200px]"
+              style={{ border: "1px solid #DDD5C5", padding: "0.75rem 1.25rem", fontFamily: "'Inter', sans-serif", fontSize: "14px", outline: "none", backgroundColor: "#FFFFFF", color: "#6B7280" }} 
               onFocus={(e) => e.target.style.borderColor = "#B8871B"} 
               onBlur={(e) => e.target.style.borderColor = "#DDD5C5"}
             >
@@ -98,9 +99,8 @@ function OpportunityHub() {
               <Link
                 key={item.id}
                 to={`/opportunities/${item.id}`}
+                className="flex flex-col md:flex-row md:items-center"
                 style={{
-                  display: "flex",
-                  alignItems: "center",
                   justifyContent: "space-between",
                   gap: "1.5rem",
                   padding: "1.5rem 2rem",
@@ -118,9 +118,9 @@ function OpportunityHub() {
                   e.currentTarget.style.borderLeftColor = "transparent";
                 }}
               >
-                <div style={{ display: "flex", alignItems: "flex-start", gap: "1.5rem", flex: 1 }}>
+                <div style={{ display: "flex", alignItems: "flex-start", gap: "1.5rem", flex: 1, minWidth: 0 }}>
                   <span style={badgeStyle}>{item.type}</span>
-                  <div>
+                  <div style={{ minWidth: 0 }}>
                     <h3 style={{ fontFamily: "'Cormorant Garamond', Georgia, serif", fontSize: "1.25rem", fontWeight: 600, color: "#111111", margin: 0, lineHeight: 1.3 }}>
                       {item.title}
                     </h3>
@@ -133,8 +133,8 @@ function OpportunityHub() {
                   </div>
                 </div>
 
-                <div style={{ display: "flex", alignItems: "center", gap: "2.5rem", flexShrink: 0 }}>
-                  <div style={{ textAlign: "right" }}>
+                <div className="flex items-center justify-between md:justify-end gap-10 w-full md:w-auto md:flex-shrink-0 border-t md:border-t-0 border-dashed border-[#DDD5C5] pt-4 md:pt-0">
+                  <div className="text-left md:text-right">
                     <p style={{ fontFamily: "'Inter', sans-serif", fontSize: "10px", fontWeight: 500, letterSpacing: "0.15em", textTransform: "uppercase", color: "#6B7280", margin: 0 }}>
                       Deadline
                     </p>

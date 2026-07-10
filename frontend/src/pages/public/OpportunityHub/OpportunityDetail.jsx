@@ -59,7 +59,7 @@ function OpportunityDetail() {
   return (
     <>
       <main style={{ backgroundColor: "#FDFBF7", minHeight: "100vh", paddingTop: "120px", paddingBottom: "100px" }}>
-        <article style={{ maxWidth: "800px", margin: "0 auto", padding: "0 1.5rem" }}>
+        <article style={{ maxWidth: "800px", margin: "0 auto", padding: "0 clamp(1rem, 4vw, 1.5rem)" }}>
           
           <Link to="/opportunities" style={{ display: "inline-block", fontFamily: "'Inter', sans-serif", fontSize: "14px", color: "#6B7280", textDecoration: "none", marginBottom: "2rem", transition: "color 0.2s" }} onMouseEnter={(e) => e.currentTarget.style.color = "#111"} onMouseLeave={(e) => e.currentTarget.style.color = "#6B7280"}>
             ← Back to Opportunities
@@ -67,7 +67,7 @@ function OpportunityDetail() {
 
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
             <span style={badgeStyle}>{opportunity.type}</span>
-            <h1 style={{ fontFamily: "'Cormorant Garamond', Georgia, serif", fontSize: "clamp(2.5rem, 5vw, 4rem)", fontWeight: 600, color: "#111111", margin: "0 0 1.5rem", lineHeight: 1.1 }}>
+            <h1 style={{ fontFamily: "'Cormorant Garamond', Georgia, serif", fontSize: "clamp(2rem, 7vw, 3.5rem)", fontWeight: 600, color: "#111111", margin: "0 0 1.5rem", lineHeight: 1.1 }}>
               {opportunity.title}
             </h1>
 

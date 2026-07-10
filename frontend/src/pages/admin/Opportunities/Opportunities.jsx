@@ -143,13 +143,13 @@ function Opportunities() {
 
   return (
     <AdminLayout>
-      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-end", marginBottom: "2.5rem" }}>
+      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-end gap-4" style={{ marginBottom: "2.5rem" }}>
         <div>
           <p style={{ fontFamily: "'Inter', sans-serif", fontSize: "11px", fontWeight: 600, letterSpacing: "0.28em", textTransform: "uppercase", color: "#D4A843", marginBottom: "0.5rem" }}>
             Opportunity Management
           </p>
 
-          <h1 style={{ fontFamily: "'Cormorant Garamond', Georgia, serif", fontSize: "3rem", fontWeight: 600, color: "#111111", margin: 0 }}>
+          <h1 style={{ fontFamily: "'Cormorant Garamond', Georgia, serif", fontSize: "clamp(2rem, 7vw, 3rem)", fontWeight: 600, color: "#111111", margin: 0 }}>
             Opportunities
           </h1>
 
@@ -168,17 +168,19 @@ function Opportunities() {
         </button>
       </div>
 
-      <div style={{ display: "flex", gap: "1rem", marginBottom: "1.5rem" }}>
+      <div className="flex flex-col sm:flex-row flex-wrap" style={{ gap: "1rem", marginBottom: "1.5rem" }}>
         <input 
           type="text" 
           placeholder="Search by title or organization..." 
           value={search}
           onChange={(e) => setSearch(e.target.value)}
-          style={{ padding: "0.75rem", width: "300px", border: "1px solid #DDD5C5", fontFamily: "'Inter', sans-serif", fontSize: "14px", outline: "none" }}
+          className="w-full sm:w-[300px]"
+          style={{ padding: "0.75rem", border: "1px solid #DDD5C5", fontFamily: "'Inter', sans-serif", fontSize: "14px", outline: "none" }}
         />
         <select 
           value={filterType}
           onChange={(e) => setFilterType(e.target.value)}
+          className="w-full sm:w-auto"
           style={{ padding: "0.75rem", border: "1px solid #DDD5C5", fontFamily: "'Inter', sans-serif", fontSize: "14px", outline: "none", backgroundColor: "#fff" }}
         >
           <option value="All">All Types</option>
@@ -190,6 +192,7 @@ function Opportunities() {
         <select 
           value={filterStatus}
           onChange={(e) => setFilterStatus(e.target.value)}
+          className="w-full sm:w-auto"
           style={{ padding: "0.75rem", border: "1px solid #DDD5C5", fontFamily: "'Inter', sans-serif", fontSize: "14px", outline: "none", backgroundColor: "#fff" }}
         >
           <option value="All">All Statuses</option>
@@ -201,7 +204,7 @@ function Opportunities() {
 
       {isModalOpen && (
         <div style={{ position: "fixed", top: 0, left: 0, right: 0, bottom: 0, backgroundColor: "rgba(17, 17, 17, 0.4)", backdropFilter: "blur(4px)", zIndex: 50, display: "flex", alignItems: "center", justifyContent: "center" }}>
-          <div style={{ backgroundColor: "#FFFFFF", width: "100%", maxWidth: "600px", maxHeight: "90vh", overflowY: "auto", border: "1px solid #DDD5C5", padding: "2.5rem" }}>
+          <div className="w-full max-w-[600px] p-4 sm:p-10" style={{ backgroundColor: "#FFFFFF", maxHeight: "90vh", overflowY: "auto", border: "1px solid #DDD5C5" }}>
             <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "2rem" }}>
               <h2 style={{ fontFamily: "'Cormorant Garamond', Georgia, serif", fontSize: "2rem", fontWeight: 600, color: "#111111", margin: 0 }}>
                 {editId ? "Edit Opportunity" : "Publish Opportunity"}
@@ -218,7 +221,7 @@ function Opportunities() {
                 <label style={{ display: "block", fontFamily: "'Inter', sans-serif", fontSize: "12px", fontWeight: 600, color: "#111111", marginBottom: "0.5rem" }}>ORGANIZATION</label>
                 <input required name="organization" value={formData.organization} onChange={handleChange} style={{ width: "100%", border: "1px solid #DDD5C5", padding: "0.75rem 1rem", fontFamily: "'Inter', sans-serif", fontSize: "14px", outline: "none" }} placeholder="e.g. Sharma & Associates" />
               </div>
-              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "1rem" }}>
+              <div className="grid grid-cols-1 sm:grid-cols-2" style={{ gap: "1rem" }}>
                 <div>
                   <label style={{ display: "block", fontFamily: "'Inter', sans-serif", fontSize: "12px", fontWeight: 600, color: "#111111", marginBottom: "0.5rem" }}>TYPE</label>
                   <select required name="type" value={formData.type} onChange={handleChange} style={{ width: "100%", border: "1px solid #DDD5C5", padding: "0.75rem 1rem", fontFamily: "'Inter', sans-serif", fontSize: "14px", outline: "none", backgroundColor: "transparent" }}>
@@ -237,7 +240,7 @@ function Opportunities() {
                   </select>
                 </div>
               </div>
-              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "1rem" }}>
+              <div className="grid grid-cols-1 sm:grid-cols-2" style={{ gap: "1rem" }}>
                 <div>
                   <label style={{ display: "block", fontFamily: "'Inter', sans-serif", fontSize: "12px", fontWeight: 600, color: "#111111", marginBottom: "0.5rem" }}>DEADLINE</label>
                   <input required name="deadline" type="date" value={formData.deadline} onChange={handleChange} style={{ width: "100%", border: "1px solid #DDD5C5", padding: "0.75rem 1rem", fontFamily: "'Inter', sans-serif", fontSize: "14px", outline: "none" }} />
@@ -276,7 +279,7 @@ function Opportunities() {
         </div>
       )}
 
-      <div style={{ backgroundColor: "#FFFFFF", border: "1px solid #DDD5C5", overflow: "hidden" }}>
+      <div style={{ backgroundColor: "#FFFFFF", border: "1px solid #DDD5C5", overflowX: "auto" }}>
         <table style={{ width: "100%", borderCollapse: "collapse" }}>
           <thead style={{ backgroundColor: "#F8F6F1", borderBottom: "1px solid #DDD5C5" }}>
             <tr>

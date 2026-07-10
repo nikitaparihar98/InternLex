@@ -11,7 +11,7 @@ const Section = ({ title, children, num }) => (
     variants={fadeIn}
     style={{ marginBottom: "3.5rem" }}
   >
-    <div style={{ display: "flex", alignItems: "flex-start", gap: "1.5rem" }}>
+    <div className="flex flex-col sm:flex-row" style={{ alignItems: "flex-start", gap: "1rem" }}>
       {num && (
         <span style={{
           fontFamily: "'Cormorant Garamond', Georgia, serif",
@@ -84,7 +84,7 @@ function PrivacyPolicy() {
   return (
     <>
       <main style={{ minHeight: "100vh", backgroundColor: "#FDFBF7", paddingTop: "140px", paddingBottom: "80px" }}>
-        <div style={{ maxWidth: "800px", margin: "0 auto", padding: "0 2.5rem" }}>
+        <div style={{ maxWidth: "800px", margin: "0 auto", padding: "0 clamp(1rem, 5vw, 2.5rem)" }}>
           
           <motion.div 
             initial="hidden"
@@ -122,7 +122,7 @@ function PrivacyPolicy() {
               backgroundColor: "#FFFFFF",
               border: "1px solid #E5E0D8",
               borderRadius: "16px",
-              padding: "4rem clamp(2rem, 5vw, 4rem)",
+              padding: "clamp(2rem, 8vw, 4rem) clamp(1rem, 5vw, 4rem)",
               boxShadow: "0 4px 20px rgba(0,0,0,0.02)"
             }}
           >

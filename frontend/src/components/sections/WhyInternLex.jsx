@@ -76,7 +76,7 @@ const cardVariants = {
 
 function WhyInternLex() {
   return (
-    <section style={{ backgroundColor: "#FFFFFF", padding: "6rem 0" }}>
+    <section style={{ backgroundColor: "#FFFFFF", padding: "6rem 0", overflow: "hidden" }}>
       <div className="responsive-container" style={{ maxWidth: "1100px" }}>
         
         {/* Header with subtle gold radial gradient behind it */}
