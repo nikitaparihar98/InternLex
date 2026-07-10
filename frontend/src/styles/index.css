@@ -227,4 +227,17 @@ a {
     padding-top: 0.75rem !important;
   }
 }
+
+/* WhyInternLex Bento Grid Styles */
+.why-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+}
+
+@media (min-width: 640px) {
+  .why-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
 

@@ -1,5 +1,4 @@
 import { motion } from "framer-motion";
-import { Link } from "react-router-dom";
 
 const features = [
   {
@@ -144,11 +143,7 @@ function WhyInternLex() {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-50px" }}
-          style={{ 
-            display: "grid", 
-            gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", 
-            gap: "2rem" 
-          }}
+          className="why-grid"
         >
           {features.map((feature, index) => (
             <motion.div 

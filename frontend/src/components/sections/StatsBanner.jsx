@@ -36,7 +36,7 @@ const CheckCircle = () => (
 
 function StatsBanner() {
   return (
-    <section style={{ backgroundColor: "#FDFBF7", padding: "0 clamp(1rem, 5vw, 2.5rem) 4rem" }}>
+    <section style={{ backgroundColor: "#FDFBF7", padding: "4rem clamp(1rem, 5vw, 2.5rem) 4rem" }}>
       <div style={{ maxWidth: "1280px", margin: "0 auto" }}>
         <motion.div
           initial={{ opacity: 0, y: 30 }}
