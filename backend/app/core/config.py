@@ -29,7 +29,6 @@ class Settings(BaseSettings):
     CLOUDINARY_API_KEY: str = ""
     CLOUDINARY_API_SECRET: str = ""
 
-    # CORS - allowed frontend origins
     CORS_ORIGINS: list[str] = [
         "http://localhost:5173",
         "http://localhost:5174",
@@ -40,6 +39,7 @@ class Settings(BaseSettings):
         "http://127.0.0.1:5175",
         "http://127.0.0.1:5176",
         "https://intern-lex.vercel.app",
+        "https://internlex.vercel.app",
         "https://internlex.in",
         "https://www.internlex.in",
     ]
