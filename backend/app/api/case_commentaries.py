@@ -39,12 +39,7 @@ def get_case_summary(case_summary_id: int, db: Session = Depends(get_db)):
 def create_case_summary(
     title: str = Form(...),
     court: str = Form(...),
-    category: str = Form(...),
-    facts: str = Form(...),
-    issues: str = Form(...),
-    judgment: str = Form(...),
-    legal_principle: str = Form(...),
-    description: str = Form(...),
+    content: str = Form(...),
     author: Optional[str] = Form(None),
     publication_date: Optional[datetime] = Form(None),
     status_val: CaseSummaryStatus = Form(CaseSummaryStatus.Draft, alias="status"),
@@ -61,12 +56,7 @@ def create_case_summary(
     case_summary = CaseSummary(
         title=title,
         court=court,
-        category=category,
-        facts=facts,
-        issues=issues,
-        judgment=judgment,
-        legal_principle=legal_principle,
-        description=description,
+        content=content,
         author=author,
         publication_date=publication_date,
         status=status_val,
@@ -84,12 +74,7 @@ def update_case_summary(
     case_summary_id: int,
     title: Optional[str] = Form(None),
     court: Optional[str] = Form(None),
-    category: Optional[str] = Form(None),
-    facts: Optional[str] = Form(None),
-    issues: Optional[str] = Form(None),
-    judgment: Optional[str] = Form(None),
-    legal_principle: Optional[str] = Form(None),
-    description: Optional[str] = Form(None),
+    content: Optional[str] = Form(None),
     author: Optional[str] = Form(None),
     publication_date: Optional[datetime] = Form(None),
     status_val: Optional[CaseSummaryStatus] = Form(None, alias="status"),
@@ -106,18 +91,8 @@ def update_case_summary(
         case_summary.title = title
     if court is not None:
         case_summary.court = court
-    if category is not None:
-        case_summary.category = category
-    if facts is not None:
-        case_summary.facts = facts
-    if issues is not None:
-        case_summary.issues = issues
-    if judgment is not None:
-        case_summary.judgment = judgment
-    if legal_principle is not None:
-        case_summary.legal_principle = legal_principle
-    if description is not None:
-        case_summary.description = description
+    if content is not None:
+        case_summary.content = content
     if author is not None:
         case_summary.author = author
     if publication_date is not None:

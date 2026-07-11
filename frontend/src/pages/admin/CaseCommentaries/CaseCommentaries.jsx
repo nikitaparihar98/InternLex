@@ -15,14 +15,9 @@ function CaseCommentaries() {
   const [formData, setFormData] = useState({
     title: "",
     author: "",
-    category: "",
     image: null,
     court: "",
-    description: "",
-    facts: "",
-    issues: "",
-    judgment: "",
-    legal_principle: "",
+    content: "",
     publication_date: "",
     status: "Published"
   });
@@ -57,14 +52,9 @@ function CaseCommentaries() {
     setFormData({
       title: item.title,
       author: item.author || "",
-      category: item.category,
       image: null,
       court: item.court,
-      description: item.description,
-      facts: item.facts,
-      issues: item.issues,
-      judgment: item.judgment,
-      legal_principle: item.legal_principle,
+      content: item.content,
       publication_date: item.publication_date ? new Date(item.publication_date).toISOString().split('T')[0] : "",
       status: item.status || "Published"
     });
@@ -73,7 +63,7 @@ function CaseCommentaries() {
 
   const openAddModal = () => {
     setEditId(null);
-    setFormData({ title: "", author: "", category: "", image: null, court: "", description: "", facts: "", issues: "", judgment: "", legal_principle: "", publication_date: "", status: "Published" });
+    setFormData({ title: "", author: "", image: null, court: "", content: "", publication_date: "", status: "Published" });
     setIsModalOpen(true);
   };
 
@@ -97,7 +87,7 @@ function CaseCommentaries() {
         toast.success("Case commentary created successfully!");
       }
       setIsModalOpen(false);
-      setFormData({ title: "", author: "", category: "", image: null, court: "", description: "", facts: "", issues: "", judgment: "", legal_principle: "", publication_date: "", status: "Published" });
+      setFormData({ title: "", author: "", image: null, court: "", content: "", publication_date: "", status: "Published" });
       setEditId(null);
       fetchCommentaries(); // Refresh list
     } catch (error) {
@@ -172,47 +162,22 @@ function CaseCommentaries() {
                 <input required type="text" name="author" value={formData.author} onChange={handleInputChange} style={{ width: "100%", border: "1px solid #DDD5C5", padding: "0.75rem", fontFamily: "'Inter', sans-serif", fontSize: "14px", outline: "none" }} />
               </div>
               <div>
-                <label style={{ display: "block", fontFamily: "'Inter', sans-serif", fontSize: "11px", fontWeight: 600, letterSpacing: "0.05em", color: "#333333", marginBottom: "0.5rem", textTransform: "uppercase" }}>Category *</label>
-                <input required type="text" name="category" value={formData.category} onChange={handleInputChange} placeholder="e.g., Constitutional Law" style={{ width: "100%", border: "1px solid #DDD5C5", padding: "0.75rem", fontFamily: "'Inter', sans-serif", fontSize: "14px", outline: "none" }} />
+                <label style={{ display: "block", fontFamily: "'Inter', sans-serif", fontSize: "11px", fontWeight: 600, letterSpacing: "0.05em", color: "#333333", marginBottom: "0.5rem", textTransform: "uppercase" }}>Publication Date</label>
+                <input type="date" name="publication_date" value={formData.publication_date} onChange={handleInputChange} style={{ width: "100%", border: "1px solid #DDD5C5", padding: "0.75rem", fontFamily: "'Inter', sans-serif", fontSize: "14px", outline: "none" }} />
               </div>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2" style={{ gap: "1.25rem" }}>
-              <div>
-                <label style={{ display: "block", fontFamily: "'Inter', sans-serif", fontSize: "11px", fontWeight: 600, letterSpacing: "0.05em", color: "#333333", marginBottom: "0.5rem", textTransform: "uppercase" }}>Publication Date</label>
-                <input type="date" name="publication_date" value={formData.publication_date} onChange={handleInputChange} style={{ width: "100%", border: "1px solid #DDD5C5", padding: "0.75rem", fontFamily: "'Inter', sans-serif", fontSize: "14px", outline: "none" }} />
-              </div>
               <div>
                 <label style={{ display: "block", fontFamily: "'Inter', sans-serif", fontSize: "11px", fontWeight: 600, letterSpacing: "0.05em", color: "#333333", marginBottom: "0.5rem", textTransform: "uppercase" }}>Image (Upload)</label>
                 <input type="file" accept="image/*" name="image" onChange={handleFileChange} style={{ width: "100%", border: "1px solid #DDD5C5", padding: "0.6rem", fontFamily: "'Inter', sans-serif", fontSize: "14px", outline: "none", backgroundColor: "#FFFFFF" }} />
               </div>
+              <div />
             </div>
 
             <div>
-              <label style={{ display: "block", fontFamily: "'Inter', sans-serif", fontSize: "11px", fontWeight: 600, letterSpacing: "0.05em", color: "#333333", marginBottom: "0.5rem", textTransform: "uppercase" }}>Short Description *</label>
-              <textarea required name="description" value={formData.description} onChange={handleInputChange} rows="2" style={{ width: "100%", border: "1px solid #DDD5C5", padding: "0.75rem", fontFamily: "'Inter', sans-serif", fontSize: "14px", outline: "none", resize: "vertical" }} />
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-2" style={{ gap: "1.25rem" }}>
-              <div>
-                <label style={{ display: "block", fontFamily: "'Inter', sans-serif", fontSize: "11px", fontWeight: 600, letterSpacing: "0.05em", color: "#333333", marginBottom: "0.5rem", textTransform: "uppercase" }}>Facts *</label>
-                <RichTextEditor value={formData.facts} onChange={(val) => setFormData({ ...formData, facts: val })} />
-              </div>
-              <div>
-                <label style={{ display: "block", fontFamily: "'Inter', sans-serif", fontSize: "11px", fontWeight: 600, letterSpacing: "0.05em", color: "#333333", marginBottom: "0.5rem", textTransform: "uppercase" }}>Issues *</label>
-                <RichTextEditor value={formData.issues} onChange={(val) => setFormData({ ...formData, issues: val })} />
-              </div>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-2" style={{ gap: "1.25rem" }}>
-              <div>
-                <label style={{ display: "block", fontFamily: "'Inter', sans-serif", fontSize: "11px", fontWeight: 600, letterSpacing: "0.05em", color: "#333333", marginBottom: "0.5rem", textTransform: "uppercase" }}>Judgment *</label>
-                <RichTextEditor value={formData.judgment} onChange={(val) => setFormData({ ...formData, judgment: val })} />
-              </div>
-              <div>
-                <label style={{ display: "block", fontFamily: "'Inter', sans-serif", fontSize: "11px", fontWeight: 600, letterSpacing: "0.05em", color: "#333333", marginBottom: "0.5rem", textTransform: "uppercase" }}>Legal Principle *</label>
-                <RichTextEditor value={formData.legal_principle} onChange={(val) => setFormData({ ...formData, legal_principle: val })} />
-              </div>
+              <label style={{ display: "block", fontFamily: "'Inter', sans-serif", fontSize: "11px", fontWeight: 600, letterSpacing: "0.05em", color: "#333333", marginBottom: "0.5rem", textTransform: "uppercase" }}>Full Content *</label>
+              <RichTextEditor value={formData.content} onChange={(val) => setFormData({ ...formData, content: val })} />
             </div>
 
             <div style={{ display: "flex", justifyContent: "flex-end", gap: "1rem", marginTop: "1rem" }}>

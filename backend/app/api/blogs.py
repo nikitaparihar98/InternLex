@@ -39,7 +39,6 @@ def get_blog(blog_id: int, db: Session = Depends(get_db)):
 def create_blog(
     title: str = Form(...),
     publication_date: Optional[datetime] = Form(None),
-    description: str = Form(...),
     content: str = Form(...),
     author: Optional[str] = Form(None),
     status_val: BlogStatus = Form(BlogStatus.Draft, alias="status"),
@@ -56,7 +55,6 @@ def create_blog(
     blog = Blog(
         title=title,
         publication_date=publication_date,
-        description=description,
         content=content,
         author=author,
         status=status_val,
@@ -74,7 +72,6 @@ def update_blog(
     blog_id: int,
     title: Optional[str] = Form(None),
     publication_date: Optional[datetime] = Form(None),
-    description: Optional[str] = Form(None),
     content: Optional[str] = Form(None),
     author: Optional[str] = Form(None),
     status_val: Optional[BlogStatus] = Form(None, alias="status"),
@@ -91,8 +88,6 @@ def update_blog(
         blog.title = title
     if publication_date is not None:
         blog.publication_date = publication_date
-    if description is not None:
-        blog.description = description
     if content is not None:
         blog.content = content
     if author is not None:

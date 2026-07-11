@@ -17,7 +17,6 @@ function Blogs() {
     author: "",
     publication_date: "",
     image: null,
-    description: "",
     content: "",
     status: "Published"
   });
@@ -54,7 +53,6 @@ function Blogs() {
       author: item.author || "",
       publication_date: item.publication_date ? new Date(item.publication_date).toISOString().split('T')[0] : "",
       image: null,
-      description: item.description,
       content: item.content,
       status: item.status || "Published"
     });
@@ -63,7 +61,7 @@ function Blogs() {
 
   const openAddModal = () => {
     setEditId(null);
-    setFormData({ title: "", author: "", publication_date: "", image: null, description: "", content: "", status: "Published" });
+    setFormData({ title: "", author: "", publication_date: "", image: null, content: "", status: "Published" });
     setIsModalOpen(true);
   };
 
@@ -87,7 +85,7 @@ function Blogs() {
         toast.success("Blog created successfully!");
       }
       setIsModalOpen(false);
-      setFormData({ title: "", author: "", publication_date: "", image: null, description: "", content: "", status: "Published" });
+      setFormData({ title: "", author: "", publication_date: "", image: null, content: "", status: "Published" });
       setEditId(null);
       fetchBlogs(); // Refresh list
     } catch (error) {
@@ -165,12 +163,7 @@ function Blogs() {
                 <label style={{ display: "block", fontFamily: "'Inter', sans-serif", fontSize: "11px", fontWeight: 600, letterSpacing: "0.05em", color: "#333333", marginBottom: "0.5rem", textTransform: "uppercase" }}>Image (Upload)</label>
                 <input type="file" accept="image/*" name="image" onChange={handleFileChange} style={{ width: "100%", border: "1px solid #DDD5C5", padding: "0.6rem", fontFamily: "'Inter', sans-serif", fontSize: "14px", outline: "none", backgroundColor: "#FFFFFF" }} />
               </div>
-            </div>
-
-            <div>
-              <label style={{ display: "block", fontFamily: "'Inter', sans-serif", fontSize: "11px", fontWeight: 600, letterSpacing: "0.05em", color: "#333333", marginBottom: "0.5rem", textTransform: "uppercase" }}>Short Description *</label>
-              <textarea required name="description" value={formData.description} onChange={handleInputChange} rows="2" style={{ width: "100%", border: "1px solid #DDD5C5", padding: "0.75rem", fontFamily: "'Inter', sans-serif", fontSize: "14px", outline: "none", resize: "vertical" }} />
-            </div>
+             </div>
 
             <div>
               <label style={{ display: "block", fontFamily: "'Inter', sans-serif", fontSize: "11px", fontWeight: 600, letterSpacing: "0.05em", color: "#333333", marginBottom: "0.5rem", textTransform: "uppercase" }}>Full Content *</label>

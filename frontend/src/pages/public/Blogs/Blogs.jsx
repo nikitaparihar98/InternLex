@@ -55,7 +55,7 @@ function Blogs() {
                     <Badge>{blog.category || "Career"}</Badge>
                     <h3 className="text-2xl font-semibold mt-4 mb-3">{blog.title}</h3>
                     <p className="text-[#6B7280] leading-7 line-clamp-3">
-                      {blog.description}
+                      {blog.content ? blog.content.replace(/<[^>]*>/g, " ").replace(/\s+/g, " ").trim().substring(0, 150) + "..." : ""}
                     </p>
                   </div>
                   <button className="mt-6 text-[#B8871B] font-semibold text-left">

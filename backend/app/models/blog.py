@@ -17,7 +17,6 @@ class Blog(Base):
     id = Column(Integer, primary_key=True, index=True)
     title = Column(String, nullable=False)
     publication_date = Column(DateTime, nullable=True)
-    description = Column(Text, nullable=False)
     content = Column(Text, nullable=False)
     author = Column(String, nullable=True)
     image = Column(String, nullable=True)

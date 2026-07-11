@@ -154,7 +154,7 @@ function FeaturedCaseCommentaries() {
                       overflow: "hidden"
                     }}
                   >
-                    {commentary.description}
+                    {commentary.content ? commentary.content.replace(/<[^>]*>/g, " ").replace(/\s+/g, " ").trim().substring(0, 150) + "..." : ""}
                   </p>
                 </div>
 

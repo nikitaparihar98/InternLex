@@ -149,7 +149,7 @@ function FeaturedBlogs() {
                       overflow: "hidden"
                     }}
                   >
-                    {blog.description}
+                    {blog.content ? blog.content.replace(/<[^>]*>/g, " ").replace(/\s+/g, " ").trim().substring(0, 150) + "..." : ""}
                   </p>
                 </div>
 

@@ -38,7 +38,6 @@ function CaseCommentaries() {
 
   const filteredCases = cases.filter(item => 
     (item.title && item.title.toLowerCase().includes(searchQuery.toLowerCase())) ||
-    (item.description && item.description.toLowerCase().includes(searchQuery.toLowerCase())) ||
     (item.content && item.content.toLowerCase().includes(searchQuery.toLowerCase()))
   );
 
@@ -206,7 +205,7 @@ function CaseCommentaries() {
                           >
                             <div style={{ padding: "0 1.5rem 1.5rem", borderTop: "1px solid #E5E0D8", marginTop: "0.5rem", paddingTop: "1.5rem" }}>
                               <div style={{ fontFamily: "'Inter', sans-serif", fontSize: "14px", color: "#4B5563", lineHeight: 1.7, marginBottom: "2rem", whiteSpace: "pre-line" }}>
-                                {commentary.description || commentary.content?.substring(0, 300) + "..."}
+                               {commentary.content ? commentary.content.replace(/<[^>]*>/g, " ").replace(/\s+/g, " ").trim().substring(0, 300) + "..." : ""}
                               </div>
                               
                               <Link
