@@ -97,6 +97,7 @@ function OpportunityDetail() {
             )}
 
             <div 
+              className="rich-text-content"
               style={{ fontFamily: "'Inter', sans-serif", fontSize: "16px", color: "#4B5563", lineHeight: 1.8, marginBottom: "4rem" }}
               dangerouslySetInnerHTML={{ __html: opportunity.description }}
             />

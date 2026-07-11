@@ -109,28 +109,28 @@ function CaseCommentaryDetail() {
             {commentary.facts && (
               <div style={{ marginBottom: "2.5rem" }}>
                 <h3 style={{ fontFamily: "'Cormorant Garamond', Georgia, serif", fontSize: "2rem", fontWeight: 600, color: "#111111", marginBottom: "1rem" }}>Facts</h3>
-                <div style={{ fontFamily: "'Inter', sans-serif", fontSize: "18px", color: "#374151", lineHeight: 1.8 }} dangerouslySetInnerHTML={{ __html: commentary.facts }} />
+                <div className="rich-text-content" style={{ fontFamily: "'Inter', sans-serif", fontSize: "18px", color: "#374151", lineHeight: 1.8 }} dangerouslySetInnerHTML={{ __html: commentary.facts }} />
               </div>
             )}
             
             {commentary.issues && (
               <div style={{ marginBottom: "2.5rem" }}>
                 <h3 style={{ fontFamily: "'Cormorant Garamond', Georgia, serif", fontSize: "2rem", fontWeight: 600, color: "#111111", marginBottom: "1rem" }}>Issues</h3>
-                <div style={{ fontFamily: "'Inter', sans-serif", fontSize: "18px", color: "#374151", lineHeight: 1.8 }} dangerouslySetInnerHTML={{ __html: commentary.issues }} />
+                <div className="rich-text-content" style={{ fontFamily: "'Inter', sans-serif", fontSize: "18px", color: "#374151", lineHeight: 1.8 }} dangerouslySetInnerHTML={{ __html: commentary.issues }} />
               </div>
             )}
             
             {commentary.judgment && (
               <div style={{ marginBottom: "2.5rem" }}>
                 <h3 style={{ fontFamily: "'Cormorant Garamond', Georgia, serif", fontSize: "2rem", fontWeight: 600, color: "#111111", marginBottom: "1rem" }}>Judgment</h3>
-                <div style={{ fontFamily: "'Inter', sans-serif", fontSize: "18px", color: "#374151", lineHeight: 1.8 }} dangerouslySetInnerHTML={{ __html: commentary.judgment }} />
+                <div className="rich-text-content" style={{ fontFamily: "'Inter', sans-serif", fontSize: "18px", color: "#374151", lineHeight: 1.8 }} dangerouslySetInnerHTML={{ __html: commentary.judgment }} />
               </div>
             )}
             
             {commentary.legal_principle && (
               <div style={{ marginBottom: "2.5rem" }}>
                 <h3 style={{ fontFamily: "'Cormorant Garamond', Georgia, serif", fontSize: "2rem", fontWeight: 600, color: "#111111", marginBottom: "1rem" }}>Legal Principle</h3>
-                <div style={{ fontFamily: "'Inter', sans-serif", fontSize: "18px", color: "#374151", lineHeight: 1.8 }} dangerouslySetInnerHTML={{ __html: commentary.legal_principle }} />
+                <div className="rich-text-content" style={{ fontFamily: "'Inter', sans-serif", fontSize: "18px", color: "#374151", lineHeight: 1.8 }} dangerouslySetInnerHTML={{ __html: commentary.legal_principle }} />
               </div>
             )}
           </motion.div>

@@ -1,10 +1,64 @@
 import React, { useRef, useEffect, useState } from 'react';
+import { 
+  Bold, 
+  Italic, 
+  Underline, 
+  Link as LinkIcon, 
+  List, 
+  ListOrdered, 
+  AlignLeft, 
+  AlignCenter, 
+  AlignRight, 
+  AlignJustify,
+  Eraser
+} from 'lucide-react';
+
+function ToolbarButton({ onClick, title, active, children }) {
+  const [isHovered, setIsHovered] = useState(false);
+  
+  return (
+    <button
+      type="button"
+      onClick={onClick}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+      style={{
+        display: "inline-flex",
+        alignItems: "center",
+        justifyContent: "center",
+        width: "32px",
+        height: "32px",
+        cursor: "pointer",
+        border: "none",
+        borderRadius: "4px",
+        background: active 
+          ? "#EDE7DC" 
+          : isHovered 
+            ? "#F5F1EA" 
+            : "transparent",
+        color: active ? "#B8871B" : "#111111",
+        transition: "all 0.2s ease-in-out",
+        outline: "none",
+      }}
+      title={title}
+    >
+      {children}
+    </button>
+  );
+}
 
 export default function RichTextEditor({ value, onChange, style }) {
   const editorRef = useRef(null);
   const isFirstRender = useRef(true);
+  
   const [fontFamily, setFontFamily] = useState('');
   const [fontSize, setFontSize] = useState('');
+  const [isBold, setIsBold] = useState(false);
+  const [isItalic, setIsItalic] = useState(false);
+  const [isUnderline, setIsUnderline] = useState(false);
+  const [alignment, setAlignment] = useState('left');
+  const [isBulletList, setIsBulletList] = useState(false);
+  const [isOrderedList, setIsOrderedList] = useState(false);
 
   useEffect(() => {
     const handleSelectionChange = () => {
@@ -31,6 +85,23 @@ export default function RichTextEditor({ value, onChange, style }) {
 
           setFontFamily(fontValue);
           setFontSize(sizeValue);
+
+          // Update styles toggle states
+          setIsBold(document.queryCommandState('bold'));
+          setIsItalic(document.queryCommandState('italic'));
+          setIsUnderline(document.queryCommandState('underline'));
+          setIsBulletList(document.queryCommandState('insertUnorderedList'));
+          setIsOrderedList(document.queryCommandState('insertOrderedList'));
+          
+          if (document.queryCommandState('justifyCenter')) {
+            setAlignment('center');
+          } else if (document.queryCommandState('justifyRight')) {
+            setAlignment('right');
+          } else if (document.queryCommandState('justifyFull')) {
+            setAlignment('justify');
+          } else {
+            setAlignment('left');
+          }
         } catch (e) {
           // ignore query command errors if not supported or disabled
         }
@@ -69,32 +140,64 @@ export default function RichTextEditor({ value, onChange, style }) {
   return (
     <div style={{ border: "1px solid #DDD5C5", borderRadius: "4px", overflow: "hidden", ...style }}>
       {/* Toolbar */}
-      <div style={{ display: "flex", flexWrap: "wrap", gap: "4px", padding: "6px 12px", borderBottom: "1px solid #DDD5C5", backgroundColor: "#FDFBF7", alignItems: "center" }}>
-        <button
-          type="button"
+      <div style={{ display: "flex", flexWrap: "wrap", gap: "6px", padding: "8px 12px", borderBottom: "1px solid #DDD5C5", backgroundColor: "#FDFBF7", alignItems: "center" }}>
+        
+        {/* Basic formatting group */}
+        <ToolbarButton
           onClick={() => executeCommand('bold')}
-          style={{ padding: "4px 8px", cursor: "pointer", border: "none", background: "none", fontWeight: "bold", fontSize: "14px", color: "#111111" }}
           title="Bold"
+          active={isBold}
         >
-          B
-        </button>
-        <button
-          type="button"
+          <Bold size={16} />
+        </ToolbarButton>
+        <ToolbarButton
           onClick={() => executeCommand('italic')}
-          style={{ padding: "4px 8px", cursor: "pointer", border: "none", background: "none", fontStyle: "italic", fontSize: "14px", color: "#111111" }}
           title="Italic"
+          active={isItalic}
         >
-          I
-        </button>
-        <button
-          type="button"
+          <Italic size={16} />
+        </ToolbarButton>
+        <ToolbarButton
           onClick={() => executeCommand('underline')}
-          style={{ padding: "4px 8px", cursor: "pointer", border: "none", background: "none", textDecoration: "underline", fontSize: "14px", color: "#111111" }}
           title="Underline"
+          active={isUnderline}
         >
-          U
-        </button>
-        <div style={{ width: "1px", height: "16px", backgroundColor: "#DDD5C5", margin: "0 4px" }} />
+          <Underline size={16} />
+        </ToolbarButton>
+
+        <div style={{ width: "1px", height: "20px", backgroundColor: "#DDD5C5", margin: "0 2px" }} />
+
+        {/* Alignment group */}
+        <ToolbarButton
+          onClick={() => executeCommand('justifyLeft')}
+          title="Align Left"
+          active={alignment === 'left'}
+        >
+          <AlignLeft size={16} />
+        </ToolbarButton>
+        <ToolbarButton
+          onClick={() => executeCommand('justifyCenter')}
+          title="Align Center"
+          active={alignment === 'center'}
+        >
+          <AlignCenter size={16} />
+        </ToolbarButton>
+        <ToolbarButton
+          onClick={() => executeCommand('justifyRight')}
+          title="Align Right"
+          active={alignment === 'right'}
+        >
+          <AlignRight size={16} />
+        </ToolbarButton>
+        <ToolbarButton
+          onClick={() => executeCommand('justifyFull')}
+          title="Justify"
+          active={alignment === 'justify'}
+        >
+          <AlignJustify size={16} />
+        </ToolbarButton>
+
+        <div style={{ width: "1px", height: "20px", backgroundColor: "#DDD5C5", margin: "0 2px" }} />
         
         {/* Font Family Dropdown */}
         <select
@@ -113,7 +216,7 @@ export default function RichTextEditor({ value, onChange, style }) {
             fontSize: "13px",
             color: "#111111",
             outline: "none",
-            height: "28px",
+            height: "32px",
             fontFamily: fontFamily || "inherit"
           }}
           title="Font Family"
@@ -145,7 +248,7 @@ export default function RichTextEditor({ value, onChange, style }) {
             fontSize: "13px",
             color: "#111111",
             outline: "none",
-            height: "28px"
+            height: "32px"
           }}
           title="Font Size"
         >
@@ -159,42 +262,42 @@ export default function RichTextEditor({ value, onChange, style }) {
           <option value="7">XXXL (48px)</option>
         </select>
 
-        <div style={{ width: "1px", height: "16px", backgroundColor: "#DDD5C5", margin: "0 4px" }} />
-        <button
-          type="button"
+        <div style={{ width: "1px", height: "20px", backgroundColor: "#DDD5C5", margin: "0 2px" }} />
+
+        {/* Lists group */}
+        <ToolbarButton
+          onClick={() => executeCommand('insertUnorderedList')}
+          title="Bullet List"
+          active={isBulletList}
+        >
+          <List size={16} />
+        </ToolbarButton>
+        <ToolbarButton
+          onClick={() => executeCommand('insertOrderedList')}
+          title="Numbered List"
+          active={isOrderedList}
+        >
+          <ListOrdered size={16} />
+        </ToolbarButton>
+
+        <div style={{ width: "1px", height: "20px", backgroundColor: "#DDD5C5", margin: "0 2px" }} />
+
+        {/* Links and formatting controls */}
+        <ToolbarButton
           onClick={() => {
             const url = prompt("Enter Link URL (e.g. https://example.com):");
             if (url) executeCommand('createLink', url);
           }}
-          style={{ padding: "4px 8px", cursor: "pointer", border: "none", background: "none", fontSize: "14px", color: "#111111" }}
           title="Link"
         >
-          🔗 Link
-        </button>
-        <button
-          type="button"
-          onClick={() => executeCommand('insertUnorderedList')}
-          style={{ padding: "4px 8px", cursor: "pointer", border: "none", background: "none", fontSize: "14px", color: "#111111" }}
-          title="Bullet List"
-        >
-          • List
-        </button>
-        <button
-          type="button"
-          onClick={() => executeCommand('insertOrderedList')}
-          style={{ padding: "4px 8px", cursor: "pointer", border: "none", background: "none", fontSize: "14px", color: "#111111" }}
-          title="Numbered List"
-        >
-          1. List
-        </button>
-        <button
-          type="button"
+          <LinkIcon size={16} />
+        </ToolbarButton>
+        <ToolbarButton
           onClick={() => executeCommand('removeFormat')}
-          style={{ padding: "4px 8px", cursor: "pointer", border: "none", background: "none", fontSize: "14px", color: "#6B7280" }}
           title="Clear Formatting"
         >
-          🧹 Clear
-        </button>
+          <Eraser size={16} />
+        </ToolbarButton>
       </div>
 
       {/* Editor Content Area */}
@@ -203,6 +306,7 @@ export default function RichTextEditor({ value, onChange, style }) {
         contentEditable
         onInput={handleInput}
         onBlur={handleInput}
+        className="rich-text-content"
         style={{
           padding: "12px 16px",
           outline: "none",
@@ -220,3 +324,4 @@ export default function RichTextEditor({ value, onChange, style }) {
     </div>
   );
 }
+

@@ -240,4 +240,40 @@ a {
     grid-template-columns: repeat(2, 1fr);
   }
 }
+
+/* ── Rich Text Editor Content & Rendered Views Styling ── */
+.rich-text-content ul {
+  list-style-type: disc !important;
+  padding-left: 2rem !important;
+  margin-top: 0.75rem !important;
+  margin-bottom: 0.75rem !important;
+  display: block !important;
+}
+
+.rich-text-content ol {
+  list-style-type: decimal !important;
+  padding-left: 2rem !important;
+  margin-top: 0.75rem !important;
+  margin-bottom: 0.75rem !important;
+  display: block !important;
+}
+
+.rich-text-content li {
+  margin-bottom: 0.5rem !important;
+  display: list-item !important;
+}
+
+.rich-text-content p {
+  margin-bottom: 1rem !important;
+}
+
+.rich-text-content blockquote {
+  border-left: 3px solid var(--color-gold);
+  padding-left: 1rem;
+  margin-left: 0;
+  margin-right: 0;
+  color: var(--color-text-muted);
+  font-style: italic;
+}
+
 

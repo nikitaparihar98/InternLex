@@ -101,6 +101,7 @@ function BlogDetail() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.3 }}
+            className="rich-text-content"
             style={{ fontFamily: "'Inter', sans-serif", fontSize: "18px", color: "#374151", lineHeight: 1.8 }}
             dangerouslySetInnerHTML={{ __html: blog.content }}
           />
