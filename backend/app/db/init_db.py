@@ -7,7 +7,7 @@ NOTE: For production, use a proper migration tool (e.g. Alembic) instead of
 create_all. This is intentionally simple, per project requirements.
 """
 from app.core.config import settings
-from app.core.security import hash_password
+from app.core.security import hash_password, verify_password
 from app.db.database import Base, engine, SessionLocal
 
 # Import every model so that they are registered on Base.metadata
@@ -30,11 +30,16 @@ def seed_admin():
     """
     Creates a default admin account if one does not already exist.
     Admin credentials come from .env (ADMIN_NAME, ADMIN_EMAIL, ADMIN_PASSWORD).
+    Updates the password if the configuration password differs from the database.
     """
     db = SessionLocal()
     try:
         existing_admin = db.query(User).filter(User.email == settings.ADMIN_EMAIL).first()
         if existing_admin:
+            if not verify_password(settings.ADMIN_PASSWORD, existing_admin.hashed_password):
+                existing_admin.hashed_password = hash_password(settings.ADMIN_PASSWORD)
+                db.commit()
+                print(f"Updated admin password in database: {settings.ADMIN_EMAIL}")
             return
 
         admin = User(
