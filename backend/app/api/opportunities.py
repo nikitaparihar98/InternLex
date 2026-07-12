@@ -20,7 +20,7 @@ router = APIRouter()
 @router.get("", response_model=List[OpportunityOut])
 def list_opportunities(db: Session = Depends(get_db)):
     """Public: list all opportunities."""
-    return db.query(Opportunity).order_by(Opportunity.created_at.desc()).all()
+    return db.query(Opportunity).order_by(Opportunity.deadline.desc()).all()
 
 
 @router.get("/{opportunity_id}", response_model=OpportunityOut)

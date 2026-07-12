@@ -1,5 +1,4 @@
 import Hero from "../../../components/sections/Hero";
-import FeaturedOpportunities from "../../../components/sections/FeaturedOpportunities";
 import WhyInternLex from "../../../components/sections/WhyInternLex";
 import PublishCTA from "../../../components/sections/PublishCTA";
 import Footer from "../../../components/layout/Footer";
@@ -10,7 +9,6 @@ function Home() {
     <>
       <Hero />
       <StatsBanner />
-      <FeaturedOpportunities />
       <WhyInternLex />
       <PublishCTA />
       <Footer />

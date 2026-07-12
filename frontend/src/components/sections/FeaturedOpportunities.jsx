@@ -28,7 +28,7 @@ function FeaturedOpportunities() {
       try {
         const data = await getOpportunities();
         const published = data.filter(o => o.status === "Published");
-        const sorted = published.sort((a, b) => (b.created_at || "").localeCompare(a.created_at || ""));
+        const sorted = published.sort((a, b) => (b.deadline || "").localeCompare(a.deadline || ""));
         setOpportunities(sorted.slice(0, 3));
       } catch (error) {
         console.error("Failed to load featured opportunities", error);
