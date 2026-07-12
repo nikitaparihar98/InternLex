@@ -33,7 +33,7 @@ function Opportunities() {
   const fetchOpportunities = async () => {
     try {
       const data = await getOpportunities();
-      const sorted = data.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
+      const sorted = data.sort((a, b) => (b.created_at || "").localeCompare(a.created_at || ""));
       setOpportunities(sorted);
       setFilteredOpportunities(sorted);
     } catch (error) {

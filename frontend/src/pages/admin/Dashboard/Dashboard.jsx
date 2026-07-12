@@ -39,7 +39,7 @@ function Dashboard() {
         });
 
         // Get last 5 opportunities
-        const sortedOpps = opps.sort((a, b) => new Date(b.created_at) - new Date(a.created_at)).slice(0, 5);
+        const sortedOpps = opps.sort((a, b) => (b.created_at || "").localeCompare(a.created_at || "")).slice(0, 5);
         setRecentOpportunities(sortedOpps);
 
       } catch (error) {

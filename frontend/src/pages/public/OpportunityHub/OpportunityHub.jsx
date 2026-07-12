@@ -32,7 +32,7 @@ function OpportunityHub() {
       try {
         const opps = await getOpportunities();
         const filtered = opps.filter(o => o.status === "Published" || o.status === "Closed");
-        filtered.sort((a, b) => new Date(b.created_at || 0) - new Date(a.created_at || 0));
+        filtered.sort((a, b) => (b.created_at || "").localeCompare(a.created_at || ""));
         setOpportunities(filtered);
       } catch (error) {
         console.error("Failed to fetch opportunities", error);
