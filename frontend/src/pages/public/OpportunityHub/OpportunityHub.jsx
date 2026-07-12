@@ -31,7 +31,7 @@ function OpportunityHub() {
     async function fetchData() {
       try {
         const opps = await getOpportunities();
-        const filtered = opps.filter(o => o.status === "Published" || o.status === "Closed");
+        const filtered = opps.filter(o => o.status === "Ongoing" || o.status === "Closed");
         filtered.sort((a, b) => (b.deadline || "").localeCompare(a.deadline || ""));
         setOpportunities(filtered);
       } catch (error) {
@@ -128,9 +128,6 @@ function OpportunityHub() {
                     </h3>
                     <p style={{ fontFamily: "'Inter', sans-serif", fontSize: "13px", color: "#6B7280", margin: "4px 0 0" }}>
                       {item.organization}
-                    </p>
-                    <p style={{ fontFamily: "'Inter', sans-serif", fontSize: "12px", color: "#111111", margin: "6px 0 0", fontWeight: 500 }}>
-                      {item.location}
                     </p>
                   </div>
                 </div>

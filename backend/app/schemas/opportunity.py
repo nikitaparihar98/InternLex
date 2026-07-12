@@ -19,7 +19,7 @@ class OpportunityBase(BaseModel):
     banner_image: Optional[str] = None
     banner_image_public_id: Optional[str] = None
     apply_link: Optional[str] = None
-    status: OpportunityStatus = OpportunityStatus.Published
+    status: OpportunityStatus = OpportunityStatus.Ongoing
     image_type: str = "landscape"
 
 

@@ -23,9 +23,8 @@ function Opportunities() {
     mode: "Online",
     description: "",
     deadline: "",
-    location: "",
     apply_link: "",
-    status: "Published",
+    status: "Ongoing",
     image_type: "landscape"
   };
   const [formData, setFormData] = useState(initialForm);
@@ -79,7 +78,6 @@ function Opportunities() {
       mode: item.mode || "Online",
       description: item.description,
       deadline: item.deadline.split("T")[0],
-      location: item.location || "",
       apply_link: item.apply_link || "",
       status: item.status,
       image_type: item.image_type || "landscape"
@@ -132,10 +130,12 @@ function Opportunities() {
   };
 
   const toggleStatus = async (item) => {
-    const newStatus = item.status === "Published" ? "Closed" : "Published";
+    const newStatus = item.status === "Ongoing" ? "Closed" : "Ongoing";
     const loadingToast = toast.loading(`Changing status to ${newStatus}...`);
     try {
-      await updateOpportunity(item.id, { status: newStatus });
+      const fd = new FormData();
+      fd.append("status", newStatus);
+      await updateOpportunity(item.id, fd);
       toast.success(`Status updated to ${newStatus}`, { id: loadingToast });
       fetchOpportunities();
     } catch (error) {
@@ -198,7 +198,7 @@ function Opportunities() {
           style={{ padding: "0.75rem", border: "1px solid #DDD5C5", fontFamily: "'Inter', sans-serif", fontSize: "14px", outline: "none", backgroundColor: "#fff" }}
         >
           <option value="All">All Statuses</option>
-          <option value="Published">Published</option>
+          <option value="Ongoing">Ongoing</option>
           <option value="Closed">Closed</option>
         </select>
       </div>
@@ -249,15 +249,12 @@ function Opportunities() {
                 <div>
                   <label style={{ display: "block", fontFamily: "'Inter', sans-serif", fontSize: "12px", fontWeight: 600, color: "#111111", marginBottom: "0.5rem" }}>STATUS</label>
                   <select required name="status" value={formData.status} onChange={handleChange} style={{ width: "100%", border: "1px solid #DDD5C5", padding: "0.75rem 1rem", fontFamily: "'Inter', sans-serif", fontSize: "14px", outline: "none", backgroundColor: "transparent" }}>
-                    <option value="Published">Published</option>
+                    <option value="Ongoing">Ongoing</option>
                     <option value="Closed">Closed</option>
                   </select>
                 </div>
               </div>
-              <div>
-                <label style={{ display: "block", fontFamily: "'Inter', sans-serif", fontSize: "12px", fontWeight: 600, color: "#111111", marginBottom: "0.5rem" }}>LOCATION (Optional)</label>
-                <input name="location" value={formData.location} onChange={handleChange} style={{ width: "100%", border: "1px solid #DDD5C5", padding: "0.75rem 1rem", fontFamily: "'Inter', sans-serif", fontSize: "14px", outline: "none" }} placeholder="e.g. New Delhi, India" />
-              </div>
+
               <div>
                 <label style={{ display: "block", fontFamily: "'Inter', sans-serif", fontSize: "12px", fontWeight: 600, color: "#111111", marginBottom: "0.5rem" }}>DESCRIPTION</label>
                 <RichTextEditor value={formData.description} onChange={(val) => setFormData({ ...formData, description: val })} />
@@ -320,7 +317,7 @@ function Opportunities() {
                   <td style={{ padding: "1.25rem" }}>
                     <button 
                       onClick={() => toggleStatus(item)} 
-                      style={{ border: "none", background: "none", cursor: "pointer", backgroundColor: item.status === "Published" ? "#D1FAE5" : "#F3F4F6", color: item.status === "Published" ? "#065F46" : "#374151", padding: "0.25rem 0.75rem", borderRadius: "9999px", fontSize: "12px", fontWeight: 600, fontFamily: "'Inter', sans-serif" }}
+                      style={{ border: "none", background: "none", cursor: "pointer", backgroundColor: item.status === "Ongoing" ? "#D1FAE5" : "#F3F4F6", color: item.status === "Ongoing" ? "#065F46" : "#374151", padding: "0.25rem 0.75rem", borderRadius: "9999px", fontSize: "12px", fontWeight: 600, fontFamily: "'Inter', sans-serif" }}
                     >
                       {item.status}
                     </button>

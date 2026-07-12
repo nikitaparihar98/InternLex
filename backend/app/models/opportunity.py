@@ -21,7 +21,7 @@ class OpportunityMode(str, enum.Enum):
 
 
 class OpportunityStatus(str, enum.Enum):
-    Published = "Published"
+    Ongoing = "Ongoing"
     Closed = "Closed"
 
 
@@ -45,7 +45,7 @@ class Opportunity(Base):
     status = Column(
         Enum(OpportunityStatus, name="opportunity_status"),
         nullable=False,
-        default=OpportunityStatus.Published,
+        default=OpportunityStatus.Ongoing,
     )
     created_at = Column(DateTime, default=datetime.utcnow)
 

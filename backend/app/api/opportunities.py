@@ -42,7 +42,7 @@ def create_opportunity(
     location: Optional[str] = Form(None),
     mode: Optional[str] = Form("Online"),
     apply_link: Optional[str] = Form(None),
-    status_val: str = Form("Published", alias="status"),
+    status_val: str = Form("Ongoing", alias="status"),
     image_type: str = Form("landscape"),
     banner_image: Optional[UploadFile] = File(None),
     db: Session = Depends(get_db),

@@ -126,7 +126,7 @@ function Dashboard() {
                             <td style={{ padding: "1rem 0", fontFamily: "'Inter', sans-serif", fontSize: "14px", fontWeight: 500, color: "#111111" }}>{item.title}</td>
                             <td style={{ padding: "1rem 0", fontFamily: "'Inter', sans-serif", fontSize: "13px", color: "#6B7280" }}>{item.organization}</td>
                             <td style={{ padding: "1rem 0", textAlign: "right" }}>
-                              <span style={{ fontFamily: "'Inter', sans-serif", fontSize: "12px", fontWeight: 600, padding: "0.25rem 0.5rem", borderRadius: "9999px", backgroundColor: item.status === "Published" ? "#D1FAE5" : "#F3F4F6", color: item.status === "Published" ? "#065F46" : "#374151" }}>
+                              <span style={{ fontFamily: "'Inter', sans-serif", fontSize: "12px", fontWeight: 600, padding: "0.25rem 0.5rem", borderRadius: "9999px", backgroundColor: item.status === "Ongoing" ? "#D1FAE5" : "#F3F4F6", color: item.status === "Ongoing" ? "#065F46" : "#374151" }}>
                                 {item.status}
                               </span>
                             </td>

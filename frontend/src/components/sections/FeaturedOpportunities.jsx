@@ -27,7 +27,7 @@ function FeaturedOpportunities() {
     async function fetchData() {
       try {
         const data = await getOpportunities();
-        const published = data.filter(o => o.status === "Published");
+        const published = data.filter(o => o.status === "Ongoing");
         const sorted = published.sort((a, b) => (b.deadline || "").localeCompare(a.deadline || ""));
         setOpportunities(sorted.slice(0, 3));
       } catch (error) {
