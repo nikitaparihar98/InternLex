@@ -15,6 +15,7 @@ class ArticleBase(BaseModel):
     image: Optional[str] = None
     image_public_id: Optional[str] = None
     status: ArticleStatus = ArticleStatus.Draft
+    image_type: str = "landscape"
 
 
 class ArticleCreate(ArticleBase):
@@ -30,6 +31,7 @@ class ArticleUpdate(BaseModel):
     image: Optional[str] = None
     image_public_id: Optional[str] = None
     status: Optional[ArticleStatus] = None
+    image_type: Optional[str] = None
 
 
 class ArticleOut(ArticleBase):

@@ -25,7 +25,8 @@ function Opportunities() {
     deadline: "",
     location: "",
     apply_link: "",
-    status: "Draft"
+    status: "Published",
+    image_type: "landscape"
   };
   const [formData, setFormData] = useState(initialForm);
 
@@ -80,7 +81,8 @@ function Opportunities() {
       deadline: item.deadline.split("T")[0],
       location: item.location || "",
       apply_link: item.apply_link || "",
-      status: item.status
+      status: item.status,
+      image_type: item.image_type || "landscape"
     });
     setImageFile(null);
     setIsModalOpen(true);
@@ -130,7 +132,7 @@ function Opportunities() {
   };
 
   const toggleStatus = async (item) => {
-    const newStatus = item.status === "Published" ? "Draft" : "Published";
+    const newStatus = item.status === "Published" ? "Closed" : "Published";
     const loadingToast = toast.loading(`Changing status to ${newStatus}...`);
     try {
       await updateOpportunity(item.id, { status: newStatus });
@@ -197,7 +199,6 @@ function Opportunities() {
         >
           <option value="All">All Statuses</option>
           <option value="Published">Published</option>
-          <option value="Draft">Draft</option>
           <option value="Closed">Closed</option>
         </select>
       </div>
@@ -248,7 +249,6 @@ function Opportunities() {
                 <div>
                   <label style={{ display: "block", fontFamily: "'Inter', sans-serif", fontSize: "12px", fontWeight: 600, color: "#111111", marginBottom: "0.5rem" }}>STATUS</label>
                   <select required name="status" value={formData.status} onChange={handleChange} style={{ width: "100%", border: "1px solid #DDD5C5", padding: "0.75rem 1rem", fontFamily: "'Inter', sans-serif", fontSize: "14px", outline: "none", backgroundColor: "transparent" }}>
-                    <option value="Draft">Draft</option>
                     <option value="Published">Published</option>
                     <option value="Closed">Closed</option>
                   </select>
@@ -266,9 +266,18 @@ function Opportunities() {
                 <label style={{ display: "block", fontFamily: "'Inter', sans-serif", fontSize: "12px", fontWeight: 600, color: "#111111", marginBottom: "0.5rem" }}>EXTERNAL LINK (Optional)</label>
                 <input name="apply_link" type="url" value={formData.apply_link} onChange={handleChange} style={{ width: "100%", border: "1px solid #DDD5C5", padding: "0.75rem 1rem", fontFamily: "'Inter', sans-serif", fontSize: "14px", outline: "none" }} placeholder="https://..." />
               </div>
-              <div>
-                <label style={{ display: "block", fontFamily: "'Inter', sans-serif", fontSize: "12px", fontWeight: 600, color: "#111111", marginBottom: "0.5rem" }}>BANNER IMAGE (Optional)</label>
-                <input type="file" accept="image/*" onChange={(e) => setImageFile(e.target.files[0])} style={{ width: "100%", border: "1px solid #DDD5C5", padding: "0.75rem 1rem", fontFamily: "'Inter', sans-serif", fontSize: "14px", outline: "none" }} />
+              <div className="grid grid-cols-1 sm:grid-cols-2" style={{ gap: "1rem" }}>
+                <div>
+                  <label style={{ display: "block", fontFamily: "'Inter', sans-serif", fontSize: "12px", fontWeight: 600, color: "#111111", marginBottom: "0.5rem" }}>BANNER IMAGE (Optional)</label>
+                  <input type="file" accept="image/*" onChange={(e) => setImageFile(e.target.files[0])} style={{ width: "100%", border: "1px solid #DDD5C5", padding: "0.75rem 1rem", fontFamily: "'Inter', sans-serif", fontSize: "14px", outline: "none" }} />
+                </div>
+                <div>
+                  <label style={{ display: "block", fontFamily: "'Inter', sans-serif", fontSize: "12px", fontWeight: 600, color: "#111111", marginBottom: "0.5rem" }}>IMAGE ASPECT RATIO</label>
+                  <select name="image_type" value={formData.image_type} onChange={handleChange} style={{ width: "100%", border: "1px solid #DDD5C5", padding: "0.75rem 1rem", fontFamily: "'Inter', sans-serif", fontSize: "14px", outline: "none", backgroundColor: "transparent" }}>
+                    <option value="landscape">Landscape (16:9)</option>
+                    <option value="portrait">Portrait (3:4)</option>
+                  </select>
+                </div>
               </div>
               
               <button type="submit" style={{ width: "100%", backgroundColor: "#B8871B", color: "#FFFFFF", fontFamily: "'Inter', sans-serif", fontSize: "13px", fontWeight: 600, padding: "1rem", border: "none", cursor: "pointer", transition: "background-color 0.2s", marginTop: "1rem" }} onMouseEnter={(e) => e.currentTarget.style.backgroundColor = "#9e7417"} onMouseLeave={(e) => e.currentTarget.style.backgroundColor = "#B8871B"}>

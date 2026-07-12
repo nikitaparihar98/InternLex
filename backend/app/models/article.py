@@ -22,6 +22,7 @@ class Article(Base):
     author = Column(String, nullable=True)
     image = Column(String, nullable=True)
     image_public_id = Column(String, nullable=True)
+    image_type = Column(String, nullable=False, default="landscape")
     status = Column(
         Enum(ArticleStatus, name="article_status"),
         nullable=False,

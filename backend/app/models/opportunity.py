@@ -21,7 +21,6 @@ class OpportunityMode(str, enum.Enum):
 
 
 class OpportunityStatus(str, enum.Enum):
-    Draft = "Draft"
     Published = "Published"
     Closed = "Closed"
 
@@ -41,11 +40,12 @@ class Opportunity(Base):
     skills = Column(String, nullable=True)
     banner_image = Column(String, nullable=True)
     banner_image_public_id = Column(String, nullable=True)
+    image_type = Column(String, nullable=False, default="landscape")
     apply_link = Column(String, nullable=True)
     status = Column(
         Enum(OpportunityStatus, name="opportunity_status"),
         nullable=False,
-        default=OpportunityStatus.Draft,
+        default=OpportunityStatus.Published,
     )
     created_at = Column(DateTime, default=datetime.utcnow)
 

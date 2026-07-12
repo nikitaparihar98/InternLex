@@ -19,7 +19,8 @@ class OpportunityBase(BaseModel):
     banner_image: Optional[str] = None
     banner_image_public_id: Optional[str] = None
     apply_link: Optional[str] = None
-    status: OpportunityStatus = OpportunityStatus.Draft
+    status: OpportunityStatus = OpportunityStatus.Published
+    image_type: str = "landscape"
 
 
 class OpportunityCreate(OpportunityBase):
@@ -41,6 +42,7 @@ class OpportunityUpdate(BaseModel):
     banner_image_public_id: Optional[str] = None
     apply_link: Optional[str] = None
     status: Optional[OpportunityStatus] = None
+    image_type: Optional[str] = None
 
 
 class OpportunityOut(OpportunityBase):

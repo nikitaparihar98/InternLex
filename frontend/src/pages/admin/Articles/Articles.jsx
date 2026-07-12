@@ -19,7 +19,8 @@ function Articles() {
     image: null,
     description: "",
     content: "",
-    status: "Published"
+    status: "Published",
+    image_type: "landscape"
   });
 
   const fetchArticles = async () => {
@@ -56,14 +57,15 @@ function Articles() {
       image: null,
       description: item.description,
       content: item.content,
-      status: item.status || "Published"
+      status: item.status || "Published",
+      image_type: item.image_type || "landscape"
     });
     setIsModalOpen(true);
   };
 
   const openAddModal = () => {
     setEditId(null);
-    setFormData({ title: "", author: "", publication_date: "", image: null, description: "", content: "", status: "Published" });
+    setFormData({ title: "", author: "", publication_date: "", image: null, description: "", content: "", status: "Published", image_type: "landscape" });
     setIsModalOpen(true);
   };
 
@@ -88,7 +90,7 @@ function Articles() {
         toast.success("Article created successfully!");
       }
       setIsModalOpen(false);
-      setFormData({ title: "", author: "", publication_date: "", image: null, description: "", content: "", status: "Published" });
+      setFormData({ title: "", author: "", publication_date: "", image: null, description: "", content: "", status: "Published", image_type: "landscape" });
       setEditId(null);
       fetchArticles(); // Refresh list
     } catch (error) {
@@ -157,7 +159,7 @@ function Articles() {
               </div>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2" style={{ gap: "1.25rem" }}>
+            <div className="grid grid-cols-1 md:grid-cols-3" style={{ gap: "1.25rem" }}>
               <div>
                 <label style={{ display: "block", fontFamily: "'Inter', sans-serif", fontSize: "11px", fontWeight: 600, letterSpacing: "0.05em", color: "#333333", marginBottom: "0.5rem", textTransform: "uppercase" }}>Publication Date</label>
                 <input type="date" name="publication_date" value={formData.publication_date} onChange={handleInputChange} style={{ width: "100%", border: "1px solid #DDD5C5", padding: "0.75rem", fontFamily: "'Inter', sans-serif", fontSize: "14px", outline: "none" }} />
@@ -165,6 +167,13 @@ function Articles() {
               <div>
                 <label style={{ display: "block", fontFamily: "'Inter', sans-serif", fontSize: "11px", fontWeight: 600, letterSpacing: "0.05em", color: "#333333", marginBottom: "0.5rem", textTransform: "uppercase" }}>Image (Upload)</label>
                 <input type="file" accept="image/*" name="image" onChange={handleFileChange} style={{ width: "100%", border: "1px solid #DDD5C5", padding: "0.6rem", fontFamily: "'Inter', sans-serif", fontSize: "14px", outline: "none", backgroundColor: "#FFFFFF" }} />
+              </div>
+              <div>
+                <label style={{ display: "block", fontFamily: "'Inter', sans-serif", fontSize: "11px", fontWeight: 600, letterSpacing: "0.05em", color: "#333333", marginBottom: "0.5rem", textTransform: "uppercase" }}>Image Aspect Ratio</label>
+                <select name="image_type" value={formData.image_type} onChange={handleInputChange} style={{ width: "100%", border: "1px solid #DDD5C5", padding: "0.75rem", fontFamily: "'Inter', sans-serif", fontSize: "14px", outline: "none", backgroundColor: "#FFFFFF" }}>
+                  <option value="landscape">Landscape (16:9)</option>
+                  <option value="portrait">Portrait (3:4)</option>
+                </select>
               </div>
             </div>
 

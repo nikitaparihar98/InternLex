@@ -42,7 +42,8 @@ def create_opportunity(
     location: Optional[str] = Form(None),
     mode: Optional[str] = Form("Online"),
     apply_link: Optional[str] = Form(None),
-    status_val: str = Form("Draft", alias="status"),
+    status_val: str = Form("Published", alias="status"),
+    image_type: str = Form("landscape"),
     banner_image: Optional[UploadFile] = File(None),
     db: Session = Depends(get_db),
     _admin=Depends(require_admin),
@@ -63,6 +64,7 @@ def create_opportunity(
         mode=mode,
         apply_link=apply_link,
         status=status_val,
+        image_type=image_type,
         banner_image=image_path,
         banner_image_public_id=image_pub_id,
     )
@@ -84,6 +86,7 @@ def update_opportunity(
     mode: Optional[str] = Form(None),
     apply_link: Optional[str] = Form(None),
     status_val: Optional[str] = Form(None, alias="status"),
+    image_type: Optional[str] = Form(None),
     banner_image: Optional[UploadFile] = File(None),
     db: Session = Depends(get_db),
     _admin=Depends(require_admin),
@@ -111,6 +114,8 @@ def update_opportunity(
         opportunity.apply_link = apply_link
     if status_val is not None:
         opportunity.status = status_val
+    if image_type is not None:
+        opportunity.image_type = image_type
     if banner_image is not None:
         # Delete old banner image if it exists
         if opportunity.banner_image_public_id:

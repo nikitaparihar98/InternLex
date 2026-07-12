@@ -87,11 +87,23 @@ function OpportunityDetail() {
             </div>
 
             {opportunity.banner_image && (
-              <div style={{ marginBottom: "3rem", borderRadius: "12px", overflow: "hidden", boxShadow: "0 4px 20px rgba(0,0,0,0.05)", backgroundColor: "#F8F6F1", display: "flex", justifyContent: "center" }}>
+              <div style={{
+                marginBottom: "3rem",
+                borderRadius: "12px",
+                overflow: "hidden",
+                boxShadow: "0 4px 20px rgba(0,0,0,0.05)",
+                backgroundColor: "#F8F6F1",
+                display: "flex",
+                justifyContent: "center",
+                aspectRatio: opportunity.image_type === "portrait" ? "3/4" : "16/9",
+                maxWidth: opportunity.image_type === "portrait" ? "400px" : "100%",
+                margin: opportunity.image_type === "portrait" ? "0 auto 3rem" : "0 0 3rem",
+                width: "100%"
+              }}>
                 <img 
                   src={getImageUrl(opportunity.banner_image)} 
                   alt={opportunity.title} 
-                  style={{ width: "100%", height: "auto", display: "block", maxHeight: "700px", objectFit: "contain" }} 
+                  style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }} 
                 />
               </div>
             )}

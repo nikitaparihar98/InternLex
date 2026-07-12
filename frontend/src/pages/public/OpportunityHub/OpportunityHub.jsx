@@ -31,7 +31,9 @@ function OpportunityHub() {
     async function fetchData() {
       try {
         const opps = await getOpportunities();
-        setOpportunities(opps.filter(o => o.status === "Published" || o.status === "Closed")); // Show published and closed
+        const filtered = opps.filter(o => o.status === "Published" || o.status === "Closed");
+        filtered.sort((a, b) => new Date(b.created_at || 0) - new Date(a.created_at || 0));
+        setOpportunities(filtered);
       } catch (error) {
         console.error("Failed to fetch opportunities", error);
       } finally {

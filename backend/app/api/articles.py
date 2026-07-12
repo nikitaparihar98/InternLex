@@ -43,6 +43,7 @@ def create_article(
     content: str = Form(...),
     author: Optional[str] = Form(None),
     status_val: ArticleStatus = Form(ArticleStatus.Draft, alias="status"),
+    image_type: str = Form("landscape"),
     image: Optional[UploadFile] = File(None),
     db: Session = Depends(get_db),
     _admin=Depends(require_admin),
@@ -60,6 +61,7 @@ def create_article(
         content=content,
         author=author,
         status=status_val,
+        image_type=image_type,
         image=image_path,
         image_public_id=image_pub_id,
     )
@@ -78,6 +80,7 @@ def update_article(
     content: Optional[str] = Form(None),
     author: Optional[str] = Form(None),
     status_val: Optional[ArticleStatus] = Form(None, alias="status"),
+    image_type: Optional[str] = Form(None),
     image: Optional[UploadFile] = File(None),
     db: Session = Depends(get_db),
     _admin=Depends(require_admin),
@@ -99,6 +102,8 @@ def update_article(
         article.author = author
     if status_val is not None:
         article.status = status_val
+    if image_type is not None:
+        article.image_type = image_type
     if image is not None:
         # Delete old image first if it exists
         if article.image_public_id:
