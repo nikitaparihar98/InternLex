@@ -164,9 +164,9 @@ function About() {
                   {[
                     { name: "Ritik Raghav", title: "FOUNDER", imgPlaceholder: "/team-ritik.jpg", zoom: 1 },
                     { name: "Adv. Dev Pawar", title: "DIRECTOR", imgPlaceholder: "/team-dev-pawar.png", zoom: 1 },
-                    { name: "Jyotsna", title: "ACADEMIC EXECUTIVE", imgPlaceholder: "/team-jyotsna.jpg", zoom: 1 },
+                    { name: "Jyotsna Valeja", title: "ACADEMIC EXECUTIVE", imgPlaceholder: "/team-jyotsna.jpg", zoom: 1 },
                     { name: "Ananya Aggarwal", title: "OPERATIONS MANAGER", imgPlaceholder: "/team-ananya.jpg", zoom: 1.25 },
-                    { name: "Garv Yadav", title: "PARTNERSHIPS & PROGRAM EXEC", imgPlaceholder: "/team-garv.jpg", zoom: 1 }
+                    { name: "Garv Yadav", title: "PARTNERSHIPS & PROGRAM EXECUTIVE", imgPlaceholder: "/team-garv.jpg", zoom: 1 }
                   ].map((member, index) => (
                     <motion.div
                       key={index}
