@@ -63,7 +63,7 @@ function About() {
 
   return (
     <>
-      <main style={{ backgroundColor: "#FDFBF7", color: "#111111", minHeight: "100vh", paddingTop: "140px", paddingBottom: "100px" }}>
+      <main style={{ backgroundColor: "#FFFFFF", color: "#111111", minHeight: "100vh", paddingTop: "140px", paddingBottom: "100px" }}>
         <section style={{ maxWidth: "1280px", margin: "0 auto", padding: "0 clamp(1rem, 5vw, 2.5rem)", overflow: "hidden" }}>
           
           <div className="grid grid-cols-1 md:grid-cols-2" style={{ gap: "4rem", marginBottom: "4rem", alignItems: "start" }}>
@@ -164,7 +164,7 @@ function About() {
                   {[
                     { name: "Ritik Raghav", title: "FOUNDER", imgPlaceholder: "/team-ritik.jpg", zoom: 1 },
                     { name: "Adv. Dev Pawar", title: "DIRECTOR", imgPlaceholder: "/team-dev-pawar.png", zoom: 1 },
-                    { name: "Adv. Adarsh Kumar Singh", title: "LEGAL ADVISOR", imgPlaceholder: "/team-adarsh.jpg", zoom: 1 },
+                    { name: "Adv. Adarsh Kumar Singh", title: "LEGAL ADVISOR", imgPlaceholder: "/team-adarsh.png", zoom: 1 },
                     { name: "Jyotsna Valeja", title: "ACADEMIC EXECUTIVE", imgPlaceholder: "/team-jyotsna.jpg", zoom: 1 },
                     { name: "Ananya Aggarwal", title: "OPERATIONS MANAGER", imgPlaceholder: "/team-ananya.jpg", zoom: 1.25 },
                     { name: "Garv Yadav", title: "PARTNERSHIPS & PROGRAM EXECUTIVE", imgPlaceholder: "/team-garv.jpg", zoom: 1 }
@@ -191,7 +191,7 @@ function About() {
                       }}
                       style={{ flex: "0 0 calc(33.333% - 1rem)", minWidth: "180px", scrollSnapAlign: "start", backgroundColor: "#FFFFFF", borderRadius: "12px", overflow: "hidden", padding: "1rem", border: "1px solid #E5E0D8", cursor: "pointer", transition: "border-color 0.2s ease" }}
                     >
-                      <div style={{ width: "100%", aspectRatio: "1/1", backgroundColor: "#FDFBF7", borderRadius: "8px", overflow: "hidden", marginBottom: "1rem", position: "relative" }}>
+                      <div style={{ width: "100%", aspectRatio: "1/1", backgroundColor: "#FFFFFF", borderRadius: "8px", overflow: "hidden", marginBottom: "1rem", position: "relative" }}>
                         <motion.div
                           variants={{
                             hidden: { opacity: 0 },
