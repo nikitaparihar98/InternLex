@@ -33,3 +33,8 @@ backend/.env
 
 # Local upload backups
 backend/uploads/
+
+# Temporary / runner files
+tempCodeRunnerFile*
+venv-img*/
+
