@@ -29,15 +29,11 @@ import AdminCaseCommentaries from "./pages/admin/CaseCommentaries/CaseCommentari
 // Student Pages removed
 
 import { Toaster } from "react-hot-toast";
-import IndependenceCelebration from "./components/ui/IndependenceCelebration";
-import IndependenceCelebrationBadge from "./components/ui/IndependenceCelebrationBadge";
 
 function App() {
   return (
     <>
       <Toaster position="top-center" reverseOrder={false} />
-      <IndependenceCelebration />
-      <IndependenceCelebrationBadge />
       <Routes>
         {/* Public Routes */}
         <Route path="/" element={<><Navbar /><Home /></>} />
