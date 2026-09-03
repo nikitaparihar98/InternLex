@@ -168,6 +168,7 @@ function About() {
                     { name: "Mr. Mahavir Mandot", title: "ACADEMIC ADVISOR", imgPlaceholder: "/team-mahavir.png", zoom: 1.15 },
                     { name: "Jyotsna Valeja", title: "ACADEMIC EXECUTIVE", imgPlaceholder: "/team-jyotsna.jpg", zoom: 1 },
                     { name: "Ananya Aggarwal", title: "OPERATIONS MANAGER", imgPlaceholder: "/team-ananya.jpg", zoom: 1.25 },
+                    { name: "Nandani Ray", title: "TRAINING & SESSION COORDINATOR", imgPlaceholder: "/team-nandani.jpg", zoom: 1 },
                     { name: "Garv Yadav", title: "PARTNERSHIPS & PROGRAM EXECUTIVE", imgPlaceholder: "/team-garv.jpg", zoom: 1 }
                   ].map((member, index) => (
                     <motion.div
