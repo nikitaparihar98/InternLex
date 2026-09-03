@@ -203,15 +203,16 @@ function About() {
                           style={{ position: "absolute", inset: 0, background: "radial-gradient(circle at center, rgba(217, 119, 6, 0.4) 0%, transparent 70%)", zIndex: 1, pointerEvents: "none" }}
                         />
                         <motion.img 
+                          loading="lazy"
                           variants={{
-                            hidden: { scale: member.zoom, filter: isMobile ? "grayscale(0%)" : "grayscale(100%)", WebkitFilter: isMobile ? "grayscale(0%)" : "grayscale(100%)" },
-                            visible: { scale: member.zoom, filter: isMobile ? "grayscale(0%)" : "grayscale(100%)", WebkitFilter: isMobile ? "grayscale(0%)" : "grayscale(100%)" },
-                            hover: { scale: member.zoom + 0.15, filter: "grayscale(0%) saturate(120%)", WebkitFilter: "grayscale(0%) saturate(120%)" }
+                            hidden: { scale: member.zoom, filter: isMobile ? "grayscale(0%)" : "grayscale(100%)" },
+                            visible: { scale: member.zoom, filter: isMobile ? "grayscale(0%)" : "grayscale(100%)" },
+                            hover: { scale: member.zoom + 0.15, filter: "grayscale(0%) saturate(120%)" }
                           }}
-                          transition={{ type: "spring", stiffness: 400, damping: 25 }}
+                          transition={{ type: "tween", duration: 0.25, ease: "easeOut" }}
                           src={member.imgPlaceholder} 
                           alt={member.name} 
-                          style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "top", position: "relative", zIndex: 2 }} 
+                          style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "top", position: "relative", zIndex: 2, willChange: "transform, filter" }} 
                         />
                       </div>
                       <div style={{ position: "relative", zIndex: 2 }}>
@@ -344,7 +345,7 @@ function About() {
                   
                   <div style={{ position: "relative", zIndex: 1, display: "flex", alignItems: "center", marginBottom: "1.5rem" }}>
                     <div style={{ padding: "4px", border: "1px solid #E5E0D8", borderRadius: "50%", display: "flex", flexShrink: 0 }}>
-                      <img src={testimonial.image} alt={testimonial.name} style={{ width: "65px", height: "65px", borderRadius: "50%", objectFit: "cover", objectPosition: testimonial.objectPosition || "center" }} />
+                      <img loading="lazy" src={testimonial.image} alt={testimonial.name} style={{ width: "65px", height: "65px", borderRadius: "50%", objectFit: "cover", objectPosition: testimonial.objectPosition || "center" }} />
                     </div>
                     <div style={{ marginLeft: "1.25rem" }}>
                       <h4 style={{ fontFamily: "'Cormorant Garamond', Georgia, serif", fontSize: "1.5rem", fontWeight: 700, color: "#111111", margin: "0 0 0.2rem" }}>{testimonial.name}</h4>
