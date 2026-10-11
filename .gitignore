@@ -37,4 +37,6 @@ backend/uploads/
 # Temporary / runner files
 tempCodeRunnerFile*
 venv-img*/
+backend/lab1*
+
 

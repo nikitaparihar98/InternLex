@@ -20,7 +20,12 @@ cloudinary.config(
 
 ALLOWED_EXTENSIONS = {".pdf", ".doc", ".docx", ".png", ".jpg", ".jpeg", ".gif", ".webp"}
 
-def _validate_extension(filename: str) -> str:
+def _validate_extension(filename: str | None) -> str:
+    if not filename:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail="No filename provided for uploaded file",
+        )
     _, ext = os.path.splitext(filename)
     ext = ext.lower()
     if ext not in ALLOWED_EXTENSIONS:
@@ -39,6 +44,12 @@ def save_upload_file(upload_file: UploadFile, folder: str) -> tuple[str, str]:
     Validates the file extension, uploads the file buffer directly to Cloudinary,
     and returns a tuple of (secure_url, public_id).
     """
+    if not upload_file or not upload_file.filename:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail="File upload is required",
+        )
+
     ext = _validate_extension(upload_file.filename)
     
     # Read the file buffer
@@ -74,11 +85,17 @@ def save_upload_file(upload_file: UploadFile, folder: str) -> tuple[str, str]:
 def delete_upload_file(public_id: str, is_raw: bool = False) -> bool:
     """
     Deletes an asset from Cloudinary using its public_id.
+    Returns True if deleted or already gone, False if failed.
+    Does not crash the caller so database deletions are not blocked.
     """
     if not public_id:
         logger.warning("Attempted to delete asset from Cloudinary with empty public_id")
         return False
         
+    if not settings.CLOUDINARY_CLOUD_NAME:
+        logger.warning(f"Cloudinary is not configured; skipping deletion for public_id={public_id}")
+        return False
+
     resource_type = "raw" if is_raw else "image"
     try:
         response = cloudinary.uploader.destroy(public_id, resource_type=resource_type)
@@ -87,17 +104,11 @@ def delete_upload_file(public_id: str, is_raw: bool = False) -> bool:
             logger.info(f"Successfully deleted asset from Cloudinary: public_id={public_id}, type={resource_type}")
             return True
         elif result == "not found":
-            logger.warning(f"Asset not found in Cloudinary (might have been deleted manually): public_id={public_id}")
+            logger.warning(f"Asset not found in Cloudinary: public_id={public_id}")
             return True
         else:
-            logger.error(f"Cloudinary delete failed for public_id={public_id}, response: {response}")
-            raise HTTPException(
-                status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-                detail=f"Failed to delete asset from Cloudinary. Result: {result}",
-            )
+            logger.warning(f"Cloudinary delete returned unexpected result: {result} for public_id={public_id}")
+            return False
     except Exception as e:
-        logger.error(f"Cloudinary Delete Exception for public_id={public_id}: {e}", exc_info=True)
-        raise HTTPException(
-            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-            detail="Failed to delete associated asset from cloud storage.",
-        )
+        logger.warning(f"Cloudinary Delete Exception for public_id={public_id}: {e}")
+        return False

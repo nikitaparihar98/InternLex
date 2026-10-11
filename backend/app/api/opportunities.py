@@ -4,7 +4,7 @@ Opportunity routes: public read access, admin-only write access.
 from typing import List, Optional
 from datetime import datetime
 
-from fastapi import APIRouter, Depends, HTTPException, status, Form, File, UploadFile
+from fastapi import APIRouter, Depends, HTTPException, status, Form, File, UploadFile, Response
 from sqlalchemy.orm import Session
 
 from app.api.deps import require_admin
@@ -18,14 +18,16 @@ router = APIRouter()
 
 
 @router.get("", response_model=List[OpportunityOut])
-def list_opportunities(db: Session = Depends(get_db)):
+def list_opportunities(response: Response, db: Session = Depends(get_db)):
     """Public: list all opportunities."""
+    response.headers["Cache-Control"] = "public, max-age=60, stale-while-revalidate=300"
     return db.query(Opportunity).order_by(Opportunity.deadline.desc()).all()
 
 
 @router.get("/{opportunity_id}", response_model=OpportunityOut)
-def get_opportunity(opportunity_id: int, db: Session = Depends(get_db)):
+def get_opportunity(opportunity_id: int, response: Response, db: Session = Depends(get_db)):
     """Public: get a single opportunity by id."""
+    response.headers["Cache-Control"] = "public, max-age=60, stale-while-revalidate=300"
     opportunity = db.query(Opportunity).filter(Opportunity.id == opportunity_id).first()
     if not opportunity:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Opportunity not found")

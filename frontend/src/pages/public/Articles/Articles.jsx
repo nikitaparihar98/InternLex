@@ -5,40 +5,100 @@ import { getArticles, getBlogs } from "../../../services/contentApi";
 import { getImageUrl } from "../../../utils/imageUrl";
 import Footer from "../../../components/layout/Footer";
 
+function ArticleCardSkeleton() {
+  return (
+    <div
+      style={{
+        backgroundColor: "#FFFFFF",
+        border: "1px solid #E5E7EB",
+        borderRadius: "8px",
+        overflow: "hidden",
+        display: "flex",
+        flexDirection: "column",
+        boxShadow: "0 4px 6px rgba(0,0,0,0.02)",
+      }}
+    >
+      <div
+        className="animate-pulse"
+        style={{
+          width: "100%",
+          height: "200px",
+          backgroundColor: "#EDE8DF",
+        }}
+      />
+      <div style={{ padding: "2rem", display: "flex", flexDirection: "column", flex: 1 }}>
+        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "1.25rem" }}>
+          <div className="animate-pulse" style={{ width: "65px", height: "14px", backgroundColor: "#EDE8DF", borderRadius: "3px" }} />
+          <div className="animate-pulse" style={{ width: "85px", height: "12px", backgroundColor: "#F3EFE8", borderRadius: "3px" }} />
+        </div>
+        <div className="animate-pulse" style={{ width: "90%", height: "20px", backgroundColor: "#E5DFD3", borderRadius: "4px", marginBottom: "0.6rem" }} />
+        <div className="animate-pulse" style={{ width: "60%", height: "20px", backgroundColor: "#E5DFD3", borderRadius: "4px", marginBottom: "1.5rem" }} />
+        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", borderTop: "1px solid #F3F4F6", paddingTop: "1.5rem", marginTop: "auto" }}>
+          <div className="animate-pulse" style={{ width: "100px", height: "14px", backgroundColor: "#F3EFE8", borderRadius: "3px" }} />
+          <div className="animate-pulse" style={{ width: "70px", height: "14px", backgroundColor: "#EDE8DF", borderRadius: "3px" }} />
+        </div>
+      </div>
+    </div>
+  );
+}
+
 function Articles() {
   const [activeTab, setActiveTab] = useState("articles"); // "articles" or "blogs"
-  const [items, setItems] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
+  const [tabData, setTabData] = useState({ articles: null, blogs: null });
   const [searchQuery, setSearchQuery] = useState("");
 
-  const filteredItems = items.filter(item => 
+  const currentItems = tabData[activeTab];
+  const isLoading = currentItems === null;
+
+  const filteredItems = (currentItems || []).filter(item => 
     (item.title && item.title.toLowerCase().includes(searchQuery.toLowerCase())) ||
     (item.description && item.description.toLowerCase().includes(searchQuery.toLowerCase())) ||
     (item.content && item.content.toLowerCase().includes(searchQuery.toLowerCase()))
   );
 
   useEffect(() => {
-    async function fetchData() {
-      setIsLoading(true);
-      try {
-        const fetcher = activeTab === "articles" ? getArticles : getBlogs;
-        const data = await fetcher();
-        const published = data.filter(item => item.status === "Published");
-        published.sort((a, b) => {
-          const dateA = new Date(a.publication_date || a.created_at || 0);
-          const dateB = new Date(b.publication_date || b.created_at || 0);
-          return dateB - dateA;
+    let isMounted = true;
+
+    // Load active tab if not yet loaded
+    if (!tabData[activeTab]) {
+      const fetcher = activeTab === "articles" ? getArticles : getBlogs;
+      fetcher()
+        .then(data => {
+          if (!isMounted) return;
+          const published = (data || []).filter(item => item.status === "Published");
+          published.sort((a, b) => {
+            const dateA = new Date(a.publication_date || a.created_at || 0);
+            const dateB = new Date(b.publication_date || b.created_at || 0);
+            return dateB - dateA;
+          });
+          setTabData(prev => ({ ...prev, [activeTab]: published }));
+        })
+        .catch(err => {
+          console.error(`Failed to load ${activeTab}`, err);
+          if (isMounted) setTabData(prev => ({ ...prev, [activeTab]: [] }));
         });
-        setItems(published);
-      } catch (error) {
-        console.error(`Failed to load ${activeTab}`, error);
-      } finally {
-        setIsLoading(false);
-      }
     }
-    
-    fetchData();
-  }, [activeTab]);
+
+    // Background prefetch the alternative tab so switching tabs is instant (0ms)
+    const otherTab = activeTab === "articles" ? "blogs" : "articles";
+    if (!tabData[otherTab]) {
+      const otherFetcher = otherTab === "articles" ? getArticles : getBlogs;
+      otherFetcher()
+        .then(data => {
+          if (!isMounted) return;
+          const published = (data || []).filter(item => item.status === "Published");
+          published.sort((a, b) => {
+            const dateA = new Date(a.publication_date || a.created_at || 0);
+            const dateB = new Date(b.publication_date || b.created_at || 0);
+            return dateB - dateA;
+          });
+          setTabData(prev => ({ ...prev, [otherTab]: published }));
+        })
+        .catch(err => console.debug("Silent prefetch failed", err));
+    }
+
+    return () => { isMounted = false; };
+  }, [activeTab, tabData]);
 
   return (
     <>
@@ -102,7 +162,6 @@ function Articles() {
                 fontFamily: "'Inter', sans-serif",
                 fontSize: "14px",
                 fontWeight: 600,
-                border: "none",
                 borderRadius: "50px",
                 cursor: "pointer",
                 backgroundColor: activeTab === "articles" ? "#111111" : "#FFFFFF",
@@ -121,7 +180,6 @@ function Articles() {
                 fontFamily: "'Inter', sans-serif",
                 fontSize: "14px",
                 fontWeight: 600,
-                border: "none",
                 borderRadius: "50px",
                 cursor: "pointer",
                 backgroundColor: activeTab === "blogs" ? "#111111" : "#FFFFFF",
@@ -137,9 +195,15 @@ function Articles() {
 
           <div style={{ minHeight: "400px" }}>
             {isLoading ? (
-              <div style={{ textAlign: "center", color: "#6B7280", padding: "4rem 0" }}>Loading {activeTab}...</div>
-            ) : items.length === 0 ? (
-              <div style={{ textAlign: "center", color: "#6B7280", padding: "4rem 0" }}>No {activeTab} available at the moment.</div>
+              <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(min(100%, 350px), 1fr))", gap: "2.5rem" }}>
+                {[1, 2, 3, 4, 5, 6].map((i) => (
+                  <ArticleCardSkeleton key={i} />
+                ))}
+              </div>
+            ) : filteredItems.length === 0 ? (
+              <div style={{ textAlign: "center", color: "#6B7280", padding: "4rem 0" }}>
+                {searchQuery ? `No ${activeTab} match your search query.` : `No ${activeTab} available at the moment.`}
+              </div>
             ) : (
               <AnimatePresence mode="wait">
                 <motion.div 

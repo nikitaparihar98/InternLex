@@ -55,7 +55,7 @@ function CaseCommentaries() {
       image: null,
       court: item.court,
       content: item.content,
-      publication_date: item.publication_date ? new Date(item.publication_date).toISOString().split('T')[0] : "",
+      publication_date: (item.publication_date && !isNaN(new Date(item.publication_date).getTime())) ? new Date(item.publication_date).toISOString().split('T')[0] : "",
       status: item.status || "Published"
     });
     setIsModalOpen(true);

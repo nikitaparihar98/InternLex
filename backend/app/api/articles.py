@@ -3,7 +3,7 @@ Article routes: public read access, admin-only write access.
 """
 from typing import List, Optional
 
-from fastapi import APIRouter, Depends, HTTPException, status, Form, File, UploadFile
+from fastapi import APIRouter, Depends, HTTPException, status, Form, File, UploadFile, Response
 from sqlalchemy.orm import Session
 
 from app.api.deps import require_admin
@@ -20,15 +20,17 @@ router = APIRouter()
 from sqlalchemy import nulls_last
 
 @router.get("", response_model=List[ArticleOut])
-def list_articles(db: Session = Depends(get_db)):
+def list_articles(response: Response, db: Session = Depends(get_db)):
     """Public: list all articles."""
+    response.headers["Cache-Control"] = "public, max-age=60, stale-while-revalidate=300"
     # Ensure sorted by publication_date descending (or created_at if null)
     return db.query(Article).order_by(nulls_last(Article.publication_date.desc()), Article.created_at.desc()).all()
 
 
 @router.get("/{article_id}", response_model=ArticleOut)
-def get_article(article_id: int, db: Session = Depends(get_db)):
+def get_article(article_id: int, response: Response, db: Session = Depends(get_db)):
     """Public: get a single article by id."""
+    response.headers["Cache-Control"] = "public, max-age=60, stale-while-revalidate=300"
     article = db.query(Article).filter(Article.id == article_id).first()
     if not article:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Article not found")

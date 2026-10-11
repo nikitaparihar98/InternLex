@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import { getOpportunity, applyToOpportunity } from "../../../services/contentApi";
+import { getOpportunity } from "../../../services/contentApi";
 import { getImageUrl } from "../../../utils/imageUrl";
 import Footer from "../../../components/layout/Footer";
 
@@ -41,9 +41,25 @@ function OpportunityDetail() {
 
   if (isLoading) {
     return (
-      <div style={{ minHeight: "100vh", display: "flex", alignItems: "center", justifyContent: "center", backgroundColor: "#F5F1EA" }}>
-        <p style={{ color: "#6B7280", fontFamily: "'Inter', sans-serif" }}>Loading opportunity details...</p>
-      </div>
+      <main style={{ backgroundColor: "#FDFBF7", minHeight: "100vh", paddingTop: "120px", paddingBottom: "100px" }}>
+        <article style={{ maxWidth: "800px", margin: "0 auto", padding: "0 clamp(1rem, 4vw, 1.5rem)" }}>
+          <div className="animate-pulse" style={{ width: "160px", height: "16px", backgroundColor: "#EDE8DF", borderRadius: "4px", marginBottom: "2rem" }} />
+          <div className="animate-pulse" style={{ width: "84px", height: "18px", backgroundColor: "#F3E7C8", borderRadius: "3px", marginBottom: "1.25rem" }} />
+          <div className="animate-pulse" style={{ width: "85%", height: "36px", backgroundColor: "#E5DFD3", borderRadius: "4px", marginBottom: "1rem" }} />
+          <div className="animate-pulse" style={{ width: "60%", height: "36px", backgroundColor: "#E5DFD3", borderRadius: "4px", marginBottom: "2.5rem" }} />
+          <div style={{ display: "flex", gap: "2rem", marginBottom: "2.5rem", paddingBottom: "2rem", borderBottom: "1px solid #E5E0D8" }}>
+            <div className="animate-pulse" style={{ width: "100px", height: "32px", backgroundColor: "#EDE8DF", borderRadius: "4px" }} />
+            <div className="animate-pulse" style={{ width: "80px", height: "32px", backgroundColor: "#EDE8DF", borderRadius: "4px" }} />
+            <div className="animate-pulse" style={{ width: "110px", height: "32px", backgroundColor: "#EDE8DF", borderRadius: "4px" }} />
+          </div>
+          <div className="animate-pulse" style={{ width: "100%", height: "260px", backgroundColor: "#EDE8DF", borderRadius: "12px", marginBottom: "2.5rem" }} />
+          <div>
+            <div className="animate-pulse" style={{ width: "100%", height: "16px", backgroundColor: "#F3EFE8", borderRadius: "4px", marginBottom: "12px" }} />
+            <div className="animate-pulse" style={{ width: "95%", height: "16px", backgroundColor: "#F3EFE8", borderRadius: "4px", marginBottom: "12px" }} />
+            <div className="animate-pulse" style={{ width: "88%", height: "16px", backgroundColor: "#F3EFE8", borderRadius: "4px" }} />
+          </div>
+        </article>
+      </main>
     );
   }
 

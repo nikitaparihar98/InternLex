@@ -1,4 +1,4 @@
-import React, { useRef, useEffect, useState } from 'react';
+import { useRef, useEffect, useState } from 'react';
 import { 
   Bold, 
   Italic, 
@@ -102,7 +102,7 @@ export default function RichTextEditor({ value, onChange, style }) {
           } else {
             setAlignment('left');
           }
-        } catch (e) {
+        } catch {
           // ignore query command errors if not supported or disabled
         }
       }

@@ -22,10 +22,11 @@ function Navbar() {
     return () => window.removeEventListener("scroll", handler);
   }, []);
 
-  // Close sidebar on route change
-  useEffect(() => {
+  const [prevPathname, setPrevPathname] = useState(location.pathname);
+  if (prevPathname !== location.pathname) {
+    setPrevPathname(location.pathname);
     setSidebarOpen(false);
-  }, [location.pathname]);
+  }
 
   return (
     <>
@@ -191,6 +192,7 @@ function Navbar() {
                     <Link
                       key={link.to}
                       to={link.to}
+                      onClick={() => setSidebarOpen(false)}
                       style={{
                         fontFamily: "'Inter', sans-serif",
                         fontSize: "15px",

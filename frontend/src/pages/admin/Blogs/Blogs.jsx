@@ -51,7 +51,7 @@ function Blogs() {
     setFormData({
       title: item.title,
       author: item.author || "",
-      publication_date: item.publication_date ? new Date(item.publication_date).toISOString().split('T')[0] : "",
+      publication_date: (item.publication_date && !isNaN(new Date(item.publication_date).getTime())) ? new Date(item.publication_date).toISOString().split('T')[0] : "",
       image: null,
       content: item.content,
       status: item.status || "Published"

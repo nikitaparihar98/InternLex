@@ -4,7 +4,7 @@ Case summary routes: public read access, admin-only write access.
 from typing import List, Optional
 from datetime import datetime
 
-from fastapi import APIRouter, Depends, HTTPException, status, Form, File, UploadFile
+from fastapi import APIRouter, Depends, HTTPException, status, Form, File, UploadFile, Response
 from sqlalchemy.orm import Session
 
 from app.api.deps import require_admin
@@ -20,15 +20,17 @@ router = APIRouter()
 from sqlalchemy import nulls_last
 
 @router.get("", response_model=List[CaseSummaryOut])
-def list_case_summaries(db: Session = Depends(get_db)):
+def list_case_summaries(response: Response, db: Session = Depends(get_db)):
     """Public: list all case summaries."""
+    response.headers["Cache-Control"] = "public, max-age=60, stale-while-revalidate=300"
     # Ensure sorted by publication_date descending (or created_at if null)
     return db.query(CaseSummary).order_by(nulls_last(CaseSummary.publication_date.desc()), CaseSummary.created_at.desc()).all()
 
 
 @router.get("/{case_summary_id}", response_model=CaseSummaryOut)
-def get_case_summary(case_summary_id: int, db: Session = Depends(get_db)):
+def get_case_summary(case_summary_id: int, response: Response, db: Session = Depends(get_db)):
     """Public: get a single case summary by id."""
+    response.headers["Cache-Control"] = "public, max-age=60, stale-while-revalidate=300"
     case_summary = db.query(CaseSummary).filter(CaseSummary.id == case_summary_id).first()
     if not case_summary:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Case summary not found")

@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import { getBlogs } from "../../../services/contentApi";
+import { getBlog, getBlogs } from "../../../services/contentApi";
 import { getImageUrl } from "../../../utils/imageUrl";
 import Footer from "../../../components/layout/Footer";
 
@@ -14,8 +14,13 @@ function BlogDetail() {
     async function fetchData() {
       setIsLoading(true);
       try {
-        const data = await getBlogs();
-        const found = data.find((a) => a.id === parseInt(id));
+        let found = null;
+        try {
+          found = await getBlog(id);
+        } catch {
+          const data = await getBlogs();
+          found = data.find((a) => a.id === parseInt(id));
+        }
         setBlog(found);
       } catch (error) {
         console.error("Failed to load blog", error);
@@ -28,9 +33,20 @@ function BlogDetail() {
 
   if (isLoading) {
     return (
-      <div style={{ minHeight: "100vh", display: "flex", justifyContent: "center", alignItems: "center", backgroundColor: "#F9F9F9" }}>
-        <p style={{ color: "#6B7280", fontFamily: "'Inter', sans-serif" }}>Loading blog...</p>
-      </div>
+      <main style={{ minHeight: "100vh", backgroundColor: "#FFFFFF", paddingTop: "120px", paddingBottom: "80px" }}>
+        <div style={{ maxWidth: "800px", margin: "0 auto", padding: "0 clamp(1rem, 4vw, 2.5rem)" }}>
+          <div className="animate-pulse" style={{ width: "130px", height: "16px", backgroundColor: "#EDE8DF", borderRadius: "4px", marginBottom: "2rem" }} />
+          <div className="animate-pulse" style={{ width: "180px", height: "14px", backgroundColor: "#EDE8DF", borderRadius: "4px", marginBottom: "1.5rem" }} />
+          <div className="animate-pulse" style={{ width: "85%", height: "36px", backgroundColor: "#E5DFD3", borderRadius: "4px", marginBottom: "1rem" }} />
+          <div className="animate-pulse" style={{ width: "60%", height: "36px", backgroundColor: "#E5DFD3", borderRadius: "4px", marginBottom: "2.5rem" }} />
+          <div className="animate-pulse" style={{ width: "100%", height: "300px", backgroundColor: "#EDE8DF", borderRadius: "12px", marginBottom: "2.5rem" }} />
+          <div>
+            <div className="animate-pulse" style={{ width: "100%", height: "16px", backgroundColor: "#F3EFE8", borderRadius: "4px", marginBottom: "12px" }} />
+            <div className="animate-pulse" style={{ width: "95%", height: "16px", backgroundColor: "#F3EFE8", borderRadius: "4px", marginBottom: "12px" }} />
+            <div className="animate-pulse" style={{ width: "90%", height: "16px", backgroundColor: "#F3EFE8", borderRadius: "4px" }} />
+          </div>
+        </div>
+      </main>
     );
   }
 
@@ -38,7 +54,7 @@ function BlogDetail() {
     return (
       <div style={{ minHeight: "100vh", display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center", backgroundColor: "#F9F9F9" }}>
         <h2 style={{ fontFamily: "'Cormorant Garamond', Georgia, serif", fontSize: "2rem", marginBottom: "1rem" }}>Blog Not Found</h2>
-        <Link to="/articles" style={{ color: "#B8871B", fontFamily: "'Inter', sans-serif", textDecoration: "none" }}>← Back to Legal Blogs</Link>
+        <Link to="/blogs" style={{ color: "#B8871B", fontFamily: "'Inter', sans-serif", textDecoration: "none" }}>← Back to Legal Blogs</Link>
       </div>
     );
   }
@@ -52,7 +68,7 @@ function BlogDetail() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
           >
-            <Link to="/articles" style={{ display: "inline-block", color: "#6B7280", fontFamily: "'Inter', sans-serif", fontSize: "14px", textDecoration: "none", marginBottom: "2rem", transition: "color 0.2s" }} onMouseEnter={(e) => e.target.style.color = "#111111"} onMouseLeave={(e) => e.target.style.color = "#6B7280"}>
+            <Link to="/blogs" style={{ display: "inline-block", color: "#6B7280", fontFamily: "'Inter', sans-serif", fontSize: "14px", textDecoration: "none", marginBottom: "2rem", transition: "color 0.2s" }} onMouseEnter={(e) => e.currentTarget.style.color = "#111111"} onMouseLeave={(e) => e.currentTarget.style.color = "#6B7280"}>
               ← Back to all blogs
             </Link>
 

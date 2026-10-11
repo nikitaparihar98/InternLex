@@ -4,21 +4,21 @@ function Contact() {
   return (
     <>
       <section style={{ backgroundColor: "#F5F1EA", minHeight: "100vh", paddingTop: "140px", paddingBottom: "100px" }}>
-        <div style={{ maxWidth: "1280px", margin: "0 auto", padding: "0 2.5rem", display: "grid", gridTemplateColumns: "1fr 1fr", gap: "5rem" }}>
+        <div className="grid grid-cols-1 lg:grid-cols-2" style={{ maxWidth: "1280px", margin: "0 auto", padding: "0 clamp(1rem, 5vw, 2.5rem)", gap: "clamp(2.5rem, 5vw, 5rem)" }}>
           
           {/* Left Column - Info */}
           <div>
             <p style={{ fontFamily: "'Inter', sans-serif", fontSize: "11px", fontWeight: 600, letterSpacing: "0.28em", textTransform: "uppercase", color: "#D4A843", marginBottom: "1rem" }}>
               Get in Touch
             </p>
-            <h1 style={{ fontFamily: "'Cormorant Garamond', Georgia, serif", fontSize: "3.5rem", fontWeight: 600, color: "#111111", margin: "0 0 1.5rem", lineHeight: 1.1 }}>
+            <h1 style={{ fontFamily: "'Cormorant Garamond', Georgia, serif", fontSize: "clamp(2.5rem, 7vw, 3.5rem)", fontWeight: 600, color: "#111111", margin: "0 0 1.5rem", lineHeight: 1.1 }}>
               Contact Our Team
             </h1>
             <p style={{ fontFamily: "'Inter', sans-serif", fontSize: "16px", color: "#6B7280", lineHeight: 1.8, maxWidth: "600px", margin: "0 auto" }}>
               Whether you are a legal professional seeking mentorship or a firm looking to partner with InternLex, we are here to help. Reach out to us using the form or via our global offices.
             </p>
 
-            <div style={{ marginTop: "3rem", display: "grid", gridTemplateColumns: "1fr 1fr", gap: "2rem" }}>
+            <div className="grid grid-cols-1 sm:grid-cols-2" style={{ marginTop: "3rem", gap: "2rem" }}>
               <div>
                 <h3 style={{ fontFamily: "'Cormorant Garamond', Georgia, serif", fontSize: "1.5rem", fontWeight: 600, color: "#111111", margin: "0 0 0.5rem" }}>London</h3>
                 <p style={{ fontFamily: "'Inter', sans-serif", fontSize: "13px", color: "#6B7280", lineHeight: 1.6 }}>
@@ -44,13 +44,13 @@ function Contact() {
           </div>
 
           {/* Right Column - Form */}
-          <div style={{ backgroundColor: "#FFFFFF", border: "1px solid #DDD5C5", padding: "3rem 2.5rem" }}>
+          <div style={{ backgroundColor: "#FFFFFF", border: "1px solid #DDD5C5", padding: "clamp(1.5rem, 4vw, 3rem) clamp(1.25rem, 3vw, 2.5rem)" }}>
             <h2 style={{ fontFamily: "'Cormorant Garamond', Georgia, serif", fontSize: "2rem", fontWeight: 600, color: "#111111", margin: "0 0 2rem" }}>
               Send a Message
             </h2>
             <form style={{ display: "flex", flexDirection: "column", gap: "1.5rem" }}>
               
-              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "1.5rem" }}>
+              <div className="grid grid-cols-1 sm:grid-cols-2" style={{ gap: "1.5rem" }}>
                 <div>
                   <label style={{ display: "block", fontFamily: "'Inter', sans-serif", fontSize: "11px", fontWeight: 600, letterSpacing: "0.05em", color: "#333333", marginBottom: "0.5rem", textTransform: "uppercase" }}>First Name</label>
                   <input type="text" style={{ width: "100%", border: "1px solid #DDD5C5", padding: "0.75rem 1rem", fontFamily: "'Inter', sans-serif", fontSize: "14px", outline: "none" }} onFocus={(e) => e.target.style.borderColor = "#B8871B"} onBlur={(e) => e.target.style.borderColor = "#DDD5C5"} />

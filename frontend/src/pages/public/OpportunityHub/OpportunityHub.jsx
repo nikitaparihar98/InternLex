@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { motion } from "framer-motion";
 import Footer from "../../../components/layout/Footer";
 import { getOpportunities } from "../../../services/contentApi";
 
@@ -20,6 +19,37 @@ const badgeStyle = {
   marginTop: "2px",
 };
 
+function OpportunityRowSkeleton({ isLast = false }) {
+  return (
+    <div
+      className="flex flex-col md:flex-row md:items-center"
+      style={{
+        justifyContent: "space-between",
+        gap: "1.5rem",
+        padding: "1.5rem 2rem",
+        borderBottom: isLast ? "none" : "1px solid #DDD5C5",
+        backgroundColor: "#FFFFFF",
+      }}
+    >
+      <div style={{ display: "flex", alignItems: "flex-start", gap: "1.5rem", flex: 1, minWidth: 0 }}>
+        <div className="animate-pulse" style={{ width: "84px", height: "18px", backgroundColor: "#F3E7C8", borderRadius: "3px", flexShrink: 0, marginTop: "2px" }} />
+        <div style={{ flex: 1 }}>
+          <div className="animate-pulse" style={{ width: "70%", maxWidth: "340px", height: "18px", backgroundColor: "#E5DFD3", borderRadius: "4px", marginBottom: "8px" }} />
+          <div className="animate-pulse" style={{ width: "40%", maxWidth: "180px", height: "13px", backgroundColor: "#EFEBE3", borderRadius: "4px" }} />
+        </div>
+      </div>
+
+      <div className="flex items-center justify-between md:justify-end gap-10 w-full md:w-auto md:flex-shrink-0 border-t md:border-t-0 border-dashed border-[#DDD5C5] pt-4 md:pt-0">
+        <div className="text-left md:text-right">
+          <div className="animate-pulse" style={{ width: "50px", height: "10px", backgroundColor: "#EFEBE3", borderRadius: "2px", marginBottom: "6px", marginLeft: "auto" }} />
+          <div className="animate-pulse" style={{ width: "80px", height: "14px", backgroundColor: "#E5DFD3", borderRadius: "3px" }} />
+        </div>
+        <div className="animate-pulse" style={{ width: "90px", height: "14px", backgroundColor: "#F3E7C8", borderRadius: "3px" }} />
+      </div>
+    </div>
+  );
+}
+
 function OpportunityHub() {
   const [opportunities, setOpportunities] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -32,7 +62,7 @@ function OpportunityHub() {
       try {
         const opps = await getOpportunities();
         const filtered = opps.filter(o => o.status === "Ongoing" || o.status === "Closed");
-        filtered.sort((a, b) => (b.deadline || "").localeCompare(a.deadline || ""));
+        filtered.sort((a, b) => (new Date(b.deadline).getTime() || 0) - (new Date(a.deadline).getTime() || 0));
         setOpportunities(filtered);
       } catch (error) {
         console.error("Failed to fetch opportunities", error);
@@ -92,9 +122,15 @@ function OpportunityHub() {
 
           <div style={{ backgroundColor: "#FFFFFF", border: "1px solid #DDD5C5" }}>
             {isLoading ? (
-              <div style={{ padding: "3rem", textAlign: "center", color: "#6B7280" }}>Loading opportunities...</div>
+              <div>
+                {[1, 2, 3, 4, 5].map((i, index) => (
+                  <OpportunityRowSkeleton key={i} isLast={index === 4} />
+                ))}
+              </div>
             ) : filteredOpps.length === 0 ? (
-              <div style={{ padding: "3rem", textAlign: "center", color: "#6B7280" }}>No opportunities found.</div>
+              <div style={{ padding: "3rem", textAlign: "center", color: "#6B7280" }}>
+                {search || filterType !== "All Types" ? "No opportunities match your filter criteria." : "No opportunities found."}
+              </div>
             ) : (
               filteredOpps.map((item, index) => {
                 return (
@@ -138,7 +174,7 @@ function OpportunityHub() {
                       Deadline
                     </p>
                     <p style={{ fontFamily: "'Inter', sans-serif", fontSize: "13px", fontWeight: 600, color: "#333333", margin: "4px 0 0" }}>
-                      {new Date(item.deadline).toLocaleDateString()}
+                      {item.deadline ? new Date(item.deadline).toLocaleDateString() : "Rolling"}
                     </p>
                   </div>
                   <div style={{ color: "#D4A843", fontSize: "1.25rem" }}>

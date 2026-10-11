@@ -3,6 +3,7 @@ import { Routes, Route } from "react-router-dom";
 
 import Navbar from "./components/layout/Navbar";
 import ProtectedRoute from "./components/layout/ProtectedRoute";
+import ScrollToTop from "./components/layout/ScrollToTop";
 import { Toaster } from "react-hot-toast";
 
 // Public Pages (Lazy Loaded)
@@ -11,12 +12,15 @@ const OpportunityHub = lazy(() => import("./pages/public/OpportunityHub/Opportun
 const OpportunityDetail = lazy(() => import("./pages/public/OpportunityHub/OpportunityDetail"));
 const Articles = lazy(() => import("./pages/public/Articles/Articles"));
 const ArticleDetail = lazy(() => import("./pages/public/Articles/ArticleDetail"));
+const Blogs = lazy(() => import("./pages/public/Blogs/Blogs"));
 const BlogDetail = lazy(() => import("./pages/public/Blogs/BlogDetail"));
 const CaseCommentaries = lazy(() => import("./pages/public/CaseCommentaries/CaseCommentaries"));
 const CaseCommentaryDetail = lazy(() => import("./pages/public/CaseCommentaries/CaseCommentaryDetail"));
 const About = lazy(() => import("./pages/public/About/About"));
+const Contact = lazy(() => import("./pages/public/Contact/Contact"));
 const PrivacyPolicy = lazy(() => import("./pages/public/About/PrivacyPolicy"));
 const SubmitPost = lazy(() => import("./pages/public/SubmitPost/SubmitPost"));
+const NotFound = lazy(() => import("./pages/public/NotFound/NotFound"));
 
 // Auth Pages (Lazy Loaded)
 const Login = lazy(() => import("./pages/public/Auth/Login"));
@@ -25,7 +29,7 @@ const Login = lazy(() => import("./pages/public/Auth/Login"));
 const Dashboard = lazy(() => import("./pages/admin/Dashboard/Dashboard"));
 const Opportunities = lazy(() => import("./pages/admin/Opportunities/Opportunities"));
 const AdminArticles = lazy(() => import("./pages/admin/Articles/Articles"));
-const Blogs = lazy(() => import("./pages/admin/Blogs/Blogs"));
+const BlogsAdmin = lazy(() => import("./pages/admin/Blogs/Blogs"));
 const AdminCaseCommentaries = lazy(() => import("./pages/admin/CaseCommentaries/CaseCommentaries"));
 
 const PageLoader = () => (
@@ -39,6 +43,7 @@ function App() {
   return (
     <>
       <Toaster position="top-center" reverseOrder={false} />
+      <ScrollToTop />
       <Suspense fallback={<PageLoader />}>
         <Routes>
           {/* Public Routes */}
@@ -47,10 +52,12 @@ function App() {
           <Route path="/opportunities/:id" element={<><Navbar /><OpportunityDetail /></>} />
           <Route path="/articles" element={<><Navbar /><Articles /></>} />
           <Route path="/articles/:id" element={<><Navbar /><ArticleDetail /></>} />
+          <Route path="/blogs" element={<><Navbar /><Blogs /></>} />
           <Route path="/blogs/:id" element={<><Navbar /><BlogDetail /></>} />
           <Route path="/case-commentaries" element={<><Navbar /><CaseCommentaries /></>} />
           <Route path="/case-commentaries/:id" element={<><Navbar /><CaseCommentaryDetail /></>} />
           <Route path="/about" element={<><Navbar /><About /></>} />
+          <Route path="/contact" element={<><Navbar /><Contact /></>} />
           <Route path="/privacy" element={<><Navbar /><PrivacyPolicy /></>} />
           <Route path="/submit-post" element={<><Navbar /><SubmitPost /></>} />
 
@@ -62,9 +69,12 @@ function App() {
             <Route path="/admin/dashboard" element={<Dashboard />} />
             <Route path="/admin/opportunities" element={<Opportunities />} />
             <Route path="/admin/articles" element={<AdminArticles />} />
-            <Route path="/admin/blogs" element={<Blogs />} />
+            <Route path="/admin/blogs" element={<BlogsAdmin />} />
             <Route path="/admin/cases" element={<AdminCaseCommentaries />} />
           </Route>
+
+          {/* 404 Fallback Route */}
+          <Route path="*" element={<><Navbar /><NotFound /></>} />
         </Routes>
       </Suspense>
     </>

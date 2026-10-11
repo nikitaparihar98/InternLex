@@ -77,7 +77,7 @@ function Opportunities() {
       type: item.type,
       mode: item.mode || "Online",
       description: item.description,
-      deadline: item.deadline.split("T")[0],
+      deadline: item.deadline ? item.deadline.split("T")[0] : "",
       apply_link: item.apply_link || "",
       status: item.status,
       image_type: item.image_type || "landscape"

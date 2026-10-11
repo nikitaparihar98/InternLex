@@ -8,6 +8,7 @@ Run with:
 from fastapi import FastAPI
 # pyrefly: ignore [missing-import]
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.middleware.gzip import GZipMiddleware
 from app.core.config import settings
 from app.db.init_db import init_db
 
@@ -26,6 +27,11 @@ app = FastAPI(
     description="Backend API for InternLex - a legal learning and opportunity management platform.",
     version="1.0.0",
 )
+
+# ---------------------------------------------------------------------------
+# GZip Compression - dramatically reduces JSON payload sizes (e.g. articles/blogs)
+# ---------------------------------------------------------------------------
+app.add_middleware(GZipMiddleware, minimum_size=1000)
 
 # ---------------------------------------------------------------------------
 # CORS - allow the React frontend (Vite dev server) to call this API

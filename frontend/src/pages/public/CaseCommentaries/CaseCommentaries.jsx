@@ -5,6 +5,43 @@ import { getCaseCommentaries } from "../../../services/contentApi";
 import { getImageUrl } from "../../../utils/imageUrl";
 import Footer from "../../../components/layout/Footer";
 
+function CaseCommentarySkeleton() {
+  return (
+    <div
+      style={{
+        backgroundColor: "#FFFFFF",
+        border: "1px solid #E5E7EB",
+        borderRadius: "8px",
+        overflow: "hidden",
+        display: "flex",
+        flexDirection: "column",
+        boxShadow: "0 4px 6px rgba(0,0,0,0.02)",
+      }}
+    >
+      <div
+        className="animate-pulse"
+        style={{
+          width: "100%",
+          height: "200px",
+          backgroundColor: "#EDE8DF",
+        }}
+      />
+      <div style={{ padding: "2rem", display: "flex", flexDirection: "column", flex: 1 }}>
+        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "1.25rem" }}>
+          <div className="animate-pulse" style={{ width: "80px", height: "14px", backgroundColor: "#EDE8DF", borderRadius: "3px" }} />
+          <div className="animate-pulse" style={{ width: "70px", height: "12px", backgroundColor: "#F3EFE8", borderRadius: "3px" }} />
+        </div>
+        <div className="animate-pulse" style={{ width: "90%", height: "20px", backgroundColor: "#E5DFD3", borderRadius: "4px", marginBottom: "0.6rem" }} />
+        <div className="animate-pulse" style={{ width: "60%", height: "20px", backgroundColor: "#E5DFD3", borderRadius: "4px", marginBottom: "1.5rem" }} />
+        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", borderTop: "1px solid #F3F4F6", paddingTop: "1.5rem", marginTop: "auto" }}>
+          <div className="animate-pulse" style={{ width: "90px", height: "14px", backgroundColor: "#F3EFE8", borderRadius: "3px" }} />
+          <div className="animate-pulse" style={{ width: "70px", height: "14px", backgroundColor: "#EDE8DF", borderRadius: "3px" }} />
+        </div>
+      </div>
+    </div>
+  );
+}
+
 function CaseCommentaries() {
   const [cases, setCases] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -90,9 +127,15 @@ function CaseCommentaries() {
 
           <div style={{ minHeight: "400px" }}>
             {isLoading ? (
-              <div style={{ textAlign: "center", color: "#6B7280", padding: "4rem 0" }}>Loading case commentaries...</div>
-            ) : cases.length === 0 ? (
-              <div style={{ textAlign: "center", color: "#6B7280", padding: "4rem 0" }}>No case commentaries available at the moment.</div>
+              <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(min(100%, 350px), 1fr))", gap: "2.5rem" }}>
+                {[1, 2, 3, 4, 5, 6].map((i) => (
+                  <CaseCommentarySkeleton key={i} />
+                ))}
+              </div>
+            ) : filteredCases.length === 0 ? (
+              <div style={{ textAlign: "center", color: "#6B7280", padding: "4rem 0" }}>
+                {searchQuery ? "No case commentaries match your search query." : "No case commentaries available at the moment."}
+              </div>
             ) : (
               <motion.div 
                 initial={{ opacity: 0, y: 20 }}
